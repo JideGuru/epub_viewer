@@ -1,4 +1,4 @@
-# epub_reader
+# epub_viewer
 
 ![](https://img.shields.io/badge/build-passing-brightgreen)
 ![](https://img.shields.io/badge/version-0.0.1-orange)
