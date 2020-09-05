@@ -7,7 +7,7 @@ PODS:
     - RealmSwift (= 3.17.3)
     - SSZipArchive (= 2.1.1)
     - ZFDragableModalTransition (= 0.6)
-  - epub_reader (0.0.1):
+  - epub_viewer (0.0.1):
     - epub_kitty_ios (= 0.1.1)
     - Flutter
   - Flutter (1.0.0)
@@ -30,7 +30,7 @@ PODS:
   - ZFDragableModalTransition (0.6)
 
 DEPENDENCIES:
-  - epub_reader (from `.symlinks/plugins/epub_reader/ios`)
+  - epub_viewer (from `.symlinks/plugins/epub_viewer/ios`)
   - Flutter (from `.symlinks/flutter/ios`)
   - path_provider (from `.symlinks/plugins/path_provider/ios`)
   - path_provider_linux (from `.symlinks/plugins/path_provider_linux/ios`)
@@ -49,8 +49,8 @@ SPEC REPOS:
     - ZFDragableModalTransition
 
 EXTERNAL SOURCES:
-  epub_reader:
-    :path: ".symlinks/plugins/epub_reader/ios"
+  epub_viewer:
+    :path: ".symlinks/plugins/epub_viewer/ios"
   Flutter:
     :path: ".symlinks/flutter/ios"
   path_provider:
@@ -65,7 +65,7 @@ EXTERNAL SOURCES:
 SPEC CHECKSUMS:
   AEXML: 601f41fcaa7bda7605cad153b0f43db9ec006c0f
   epub_kitty_ios: ea360324165274b2d0f90a3d19c42397e3ba2fee
-  epub_reader: 7222faa4c0a15cc444b710009295d95e9385933b
+  epub_viewer: 6d93e46357574cce7bbd8b66f8d3e21d532fbfa5
   Flutter: 0e3d915762c693b495b44d77113d4970485de6ec
   FontBlaster: 127aa66419478d1c62926c7fdb39841633344a45
   MenuItemKit: 0f850e630b0a3d2bd80fec54db87ce0d2077ada2

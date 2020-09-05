@@ -1,4 +1,4 @@
-package com.jideguru.epub_reader;
+package com.jideguru.epub_viewer;
 
 import android.app.Activity;
 import android.content.Context;
@@ -13,7 +13,7 @@ import io.flutter.plugin.common.MethodChannel.Result;
 import io.flutter.plugin.common.PluginRegistry.Registrar;
 
 /** EpubReaderPlugin */
-public class EpubReaderPlugin implements MethodCallHandler {
+public class EpubViewerPlugin implements MethodCallHandler {
 
   private Reader reader;
   private ReaderConfig config;
@@ -29,8 +29,8 @@ public class EpubReaderPlugin implements MethodCallHandler {
     activity = registrar.activity();
     messenger = registrar.messenger();
 
-    final MethodChannel channel = new MethodChannel(registrar.messenger(), "epub_reader");
-    channel.setMethodCallHandler(new EpubReaderPlugin());
+    final MethodChannel channel = new MethodChannel(registrar.messenger(), "epub_viewer");
+    channel.setMethodCallHandler(new EpubViewerPlugin());
   }
 
   @Override

@@ -1,4 +1,4 @@
-package com.jideguru.epub_reader;
+package com.jideguru.epub_viewer;
 
 import android.content.Context;
 import android.util.Log;

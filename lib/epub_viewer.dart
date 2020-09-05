@@ -2,8 +2,8 @@ import 'dart:convert';
 
 import 'package:flutter/services.dart';
 
-class EpubReader {
-  static const MethodChannel _channel = const MethodChannel('epub_reader');
+class EpubViewer {
+  static const MethodChannel _channel = const MethodChannel('epub_viewer');
   static const EventChannel _pageChannel = const EventChannel('page');
 
   /// @param identifier unique key for epub

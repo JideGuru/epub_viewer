@@ -2,7 +2,7 @@
 # To learn more about a Podspec see http://guides.cocoapods.org/syntax/podspec.html
 #
 Pod::Spec.new do |s|
-  s.name             = 'epub_reader'
+  s.name             = 'epub_viewer'
   s.version          = '0.0.1'
   s.summary          = 'A epub reader flutter plugin project.'
   s.description      = <<-DESC

@@ -19,7 +19,7 @@ dev_dependencies:
   build_runner: ^1.10.0
   hive_generator: ^0.5.0
 
-  epub_reader:
+  epub_viewer:
     path: ../
 
 

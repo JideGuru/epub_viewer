@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:dio/dio.dart';
-import 'package:epub_reader/epub_reader.dart';
+import 'package:epub_viewer/epub_viewer.dart';
 import 'package:flutter/material.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
@@ -52,8 +52,8 @@ class _MyAppState extends State<MyApp> {
 
                     String iosBookPath = '${appDocDir.path}/chair.epub';
                     String androidBookPath = 'file:///android_asset/3.epub';
-                    EpubReader.setConfig("iosBook", "#32a852", "vertical", true);
-                    EpubReader.open(
+                    EpubViewer.setConfig("iosBook", "#32a852", "vertical", true);
+                    EpubViewer.open(
                       Platform.isAndroid ? androidBookPath : iosBookPath,
                       lastLocation: {
                         "bookId": "2239",
@@ -65,7 +65,7 @@ class _MyAppState extends State<MyApp> {
                       },
                     );
                     // get current locator
-                    EpubReader.locatorStream.listen((event) {
+                    EpubViewer.locatorStream.listen((event) {
                       print('EVENT: $event');
                     });
                   },

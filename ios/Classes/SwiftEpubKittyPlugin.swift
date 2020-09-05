@@ -2,7 +2,7 @@ import Flutter
 import UIKit
 import epub_kitty_ios
 
-public class SwiftEpubReaderPlugin: NSObject, FlutterPlugin,FolioReaderPageDelegate,FlutterStreamHandler {
+public class SwiftEpubViewerPlugin: NSObject, FlutterPlugin,FolioReaderPageDelegate,FlutterStreamHandler {
     
     let folioReader = FolioReader()
     static var pageResult: FlutterResult? = nil
@@ -13,10 +13,10 @@ public class SwiftEpubReaderPlugin: NSObject, FlutterPlugin,FolioReaderPageDeleg
     
     //12.13
     public static func register(with registrar: FlutterPluginRegistrar) {
-      let channel = FlutterMethodChannel(name: "epub_reader", binaryMessenger: registrar.messenger())
+      let channel = FlutterMethodChannel(name: "epub_viewer", binaryMessenger: registrar.messenger())
       let instance = SwiftEpubReaderPlugin()
         
-      pageChannel = FlutterEventChannel.init(name: "page/",
+      pageChannel = FlutterEventChannel.init(name: "page",
                                   binaryMessenger: registrar.messenger());
       
       registrar.addMethodCallDelegate(instance, channel: channel)
