@@ -1,9 +1,5 @@
 # Epub Viewer [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com) [![pub package](https://img.shields.io/pub/v/epub_viewer.svg)](https://pub.dartlang.org/packages/epub_viewer)
 
-![](https://img.shields.io/badge/build-passing-brightgreen)
-![](https://img.shields.io/badge/version-0.0.1-orange)
-![](https://img.shields.io/badge/platform-flutter-lightgrey)
-
 
 a fork of [epub_kitty](https://github.com/451518849/epub_kitty) with few more features.
 i made this out of epub_kitty because the author was inactive(he isn't merging PRs or attending to issues) and i started having alot of issues with the plugin
@@ -12,7 +8,7 @@ i made this out of epub_kitty because the author was inactive(he isn't merging P
 <table>
   <tr>
     <td align="center">
-      <img src="screenshots/1.png" width="250px">
+      <img src="screenshots/1.jpg" width="250px">
     </td>
     <td align="center">
       <img src="screenshots/2.png" width="250px">
@@ -20,7 +16,7 @@ i made this out of epub_kitty because the author was inactive(he isn't merging P
   </tr>
   <tr>
     <td align="center">
-       <img src="screenshots/3.png" width="250px">
+       <img src="screenshots/3.jpg" width="250px">
     </td>
     <td align="center">
        <img src="screenshots/4.png" width="250px">
@@ -38,7 +34,7 @@ epub_reader is an epub ebook reader that encapsulates the [folioreader](https://
 ## Install
 ```
 dependencies:
-  material_about: latest_version
+  epub_viewer: latest_version
 ```
 
 ## Usage
