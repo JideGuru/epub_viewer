@@ -51,7 +51,7 @@ EpubViewer.setConfig("book", "#32a852","vertical",true);
 * @bookPath
 * @lastLocation (optional and only android for now)
 */
-EpubReader.open(
+EpubViewer.open(
     'bookPath',
 	lastLocation: {
         "bookId": "2239",
@@ -60,11 +60,11 @@ EpubReader.open(
         "locations": {
             "cfi": "epubcfi(/0!/4/4[simple_book]/2/2/6)"
         }
-    },
+    }, // first page will open up if the value is null
 );
 
 // Get locator which you can save in your database
-EpubReader.locatorStream.listen((locator) {
+EpubViewer.locatorStream.listen((locator) {
    print('Locator: $locator');
    // convert locator from string to json and save to your database to be retrieved later
 });
