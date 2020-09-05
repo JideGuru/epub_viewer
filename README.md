@@ -36,7 +36,7 @@ epub_reader is an epub ebook reader that encapsulates the [folioreader](https://
     second step
 	 /**
 	 * @bookPath
-	 * @lastLocation (optional)
+	 * @lastLocation (optional and only android for now)
 	 */
 	EpubReader.open(
 	   'bookPath',

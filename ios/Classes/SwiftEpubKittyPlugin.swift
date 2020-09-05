@@ -14,7 +14,7 @@ public class SwiftEpubViewerPlugin: NSObject, FlutterPlugin,FolioReaderPageDeleg
     //12.13
     public static func register(with registrar: FlutterPluginRegistrar) {
       let channel = FlutterMethodChannel(name: "epub_viewer", binaryMessenger: registrar.messenger())
-      let instance = SwiftEpubReaderPlugin()
+      let instance = SwiftEpubViewerPlugin()
         
       pageChannel = FlutterEventChannel.init(name: "page",
                                   binaryMessenger: registrar.messenger());
@@ -54,12 +54,12 @@ public class SwiftEpubViewerPlugin: NSObject, FlutterPlugin,FolioReaderPageDeleg
     }
       
       private func setPageHandler(){
-          SwiftEpubReaderPlugin.pageChannel?.setStreamHandler(self)
+          SwiftEpubViewerPlugin.pageChannel?.setStreamHandler(self)
 
       }
       
       public func onListen(withArguments arguments: Any?, eventSink events: @escaping FlutterEventSink) -> FlutterError? {
-          SwiftEpubReaderPlugin.pageResult = events
+          SwiftEpubViewerPlugin.pageResult = events
           return nil
       }
 
@@ -83,8 +83,8 @@ public class SwiftEpubViewerPlugin: NSObject, FlutterPlugin,FolioReaderPageDeleg
           
           print("page.pageNumber:"+String(page.pageNumber))
 
-          if (SwiftEpubReaderPlugin.pageResult != nil){
-              SwiftEpubReaderPlugin.pageResult!(String(page.pageNumber))
+          if (SwiftEpubViewerPlugin.pageResult != nil){
+              SwiftEpubViewerPlugin.pageResult!(String(page.pageNumber))
           }
 
       }

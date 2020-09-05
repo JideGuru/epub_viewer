@@ -1,4 +1,4 @@
-#import "EpubReaderPlugin.h"
+#import "EpubViewerPlugin.h"
 #import <epub_viewer/epub_viewer-Swift.h>
 
 @implementation EpubViewerPlugin
