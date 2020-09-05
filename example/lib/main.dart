@@ -1,15 +1,12 @@
 import 'dart:io';
 
+import 'package:dio/dio.dart';
 import 'package:epub_kitty/epub_kitty.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:hive/hive.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  Directory directory = await getApplicationDocumentsDirectory();
-  Hive.init(directory.path);
   runApp(MyApp());
 }
 
@@ -19,17 +16,22 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  static const pageChannel =
-      const EventChannel('com.xiaofwang.epub_kitty/page');
+  bool loading = true;
+  Dio dio = new Dio();
 
   @override
   void initState() {
     super.initState();
+    download();
+  }
 
-     pageChannel.receiveBroadcastStream('com.xiaofwang.epub_kitty/page').listen(
-         (Object event) {
-       print('page: $event');
-     }, onError: null);
+  download() async {
+    if (Platform.isIOS) {
+      print('download');
+      await downloadFile();
+    } else {
+      loading = false;
+    }
   }
 
   @override
@@ -40,34 +42,83 @@ class _MyAppState extends State<MyApp> {
           title: const Text('Plugin example app'),
         ),
         body: Center(
-          child: GestureDetector(
-            onTap: () async {
-              Directory appDocDir = await getApplicationDocumentsDirectory();
-              print('$appDocDir');
+          child: loading
+              ? CircularProgressIndicator()
+              : GestureDetector(
+                  onTap: () async {
+                    Directory appDocDir =
+                        await getApplicationDocumentsDirectory();
+                    print('$appDocDir');
 
-              String iosBookPath = '${appDocDir.path}/4.epub';
-              String androidBookPath = 'file:///android_asset/3.epub';
-              EpubKitty.setConfig("iosBook", "#32a852", "vertical", true);
-              EpubKitty.open(
-                Platform.isAndroid ? androidBookPath : iosBookPath,
-                lastLocation: {
-                  "bookId": "_simple_book",
-                  "href": "/OEBPS/ch06.xhtml",
-                  "created": 1539934158390,
-                  "locations": {
-                    "cfi": "epubcfi(/0!/4/4[simple_book]/2/2/6)"
-                  }
-                },
-              );
-            },
-            child: Container(
-              child: Text('open epub'),
-            ),
-          ),
+                    String iosBookPath = '${appDocDir.path}/chair.epub';
+                    String androidBookPath = 'file:///android_asset/3.epub';
+                    EpubKitty.setConfig("iosBook", "#32a852", "vertical", true);
+                    EpubKitty.open(
+                      Platform.isAndroid ? androidBookPath : iosBookPath,
+                      lastLocation: {
+                        "bookId": "_simple_book",
+                        "href": "/OEBPS/ch06.xhtml",
+                        "created": 1539934158390,
+                        "locations": {
+                          "cfi": "epubcfi(/0!/4/4[simple_book]/2/2/6)"
+                        }
+                      },
+                    );
+                    // get current locator
+                    EpubKitty.timerStream.listen((event) {
+                      print('EVENT: $event');
+                    });
+                  },
+                  child: Container(
+                    child: Text('open epub'),
+                  ),
+                ),
         ),
       ),
     );
   }
-}
 
-//path:file:///var/mobile/Containers/Data/Application/BF0BEEFE-31BC-4989-B779-6517EE275336/Documents/3.epub/OEBPS/cover.xhtml
+  Future downloadFile() async {
+    print('download1');
+    PermissionStatus permission = await PermissionHandler()
+        .checkPermissionStatus(PermissionGroup.storage);
+
+    if (permission != PermissionStatus.granted) {
+      await PermissionHandler().requestPermissions([PermissionGroup.storage]);
+      await startDownload();
+    } else {
+      await startDownload();
+    }
+  }
+
+  startDownload() async {
+    Directory appDocDir = Platform.isAndroid
+        ? await getExternalStorageDirectory()
+        : await getApplicationDocumentsDirectory();
+
+    String path = appDocDir.path + '/chair.epub';
+    print(path);
+    File file = File(path);
+
+    if (!File(path).existsSync()) {
+      await file.create();
+      await dio.download(
+        'https://github.com/FolioReader/FolioReaderKit/raw/master/Example/'
+        'Shared/Sample%20eBooks/The%20Silver%20Chair.epub',
+        path,
+        deleteOnError: true,
+        onReceiveProgress: (receivedBytes, totalBytes) {
+          print((receivedBytes / totalBytes * 100).toStringAsFixed(0));
+          //Check if download is complete and close the alert dialog
+          if (receivedBytes == totalBytes) {
+            loading = false;
+            setState(() {});
+          }
+        },
+      );
+    } else {
+      loading = false;
+      setState(() {});
+    }
+  }
+}

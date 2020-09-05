@@ -9,7 +9,8 @@ dependencies:
   flutter:
     sdk: flutter
   cupertino_icons: ^0.1.2
-  hive: ^1.4.1+1
+  permission_handler: ^4.2.0+hotfix.1
+  dio: ^3.0.9
   path_provider: ^1.4.0
 
 dev_dependencies:

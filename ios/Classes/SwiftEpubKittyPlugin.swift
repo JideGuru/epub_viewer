@@ -40,7 +40,8 @@ public class SwiftEpubKittyPlugin: NSObject, FlutterPlugin,FolioReaderPageDelega
           setPageHandler()
           let arguments = call.arguments as![String:Any]
           let bookPath = arguments["bookPath"] as! String
-          self.open(epubPath: bookPath)
+          let location = arguments["lastLocation"] as! String
+          self.open(epubPath: bookPath, location: location)
 
           break
       case "close":
@@ -67,14 +68,14 @@ public class SwiftEpubKittyPlugin: NSObject, FlutterPlugin,FolioReaderPageDelega
       }
       
       
-      fileprivate func open(epubPath: String) {
+      fileprivate func open(epubPath: String, location: String) {
            if epubPath == "" {
               return
           }
 
           let readerVc = UIApplication.shared.keyWindow!.rootViewController ?? UIViewController()
-            
-        folioReader.presentReader(parentViewController: readerVc, withEpubPath: epubPath, andConfig: self.config!.config, shouldRemoveEpub: true)
+
+        folioReader.presentReader(parentViewController: readerVc, withEpubPath: epubPath, andConfig: self.config!.config, shouldRemoveEpub: false)
           folioReader.readerCenter?.pageDelegate = self
       }
 

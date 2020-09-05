@@ -34,7 +34,7 @@ public class Reader  implements OnHighlightListener, ReadLocatorListener, FolioR
     private EventChannel.EventSink pageEventSink;
     private BinaryMessenger messenger;
 
-    private static final String PAGE_CHANNEL = "com.xiaofwang.epub_reader/page";
+    private static final String PAGE_CHANNEL = "page";
 
     Reader(Context context, BinaryMessenger messenger,ReaderConfig config){
         this.context = context;
@@ -77,7 +77,8 @@ public class Reader  implements OnHighlightListener, ReadLocatorListener, FolioR
     }
 
     private void setPageHandler(BinaryMessenger messenger){
-
+//        final MethodChannel channel = new MethodChannel(registrar.messenger(), "page");
+//        channel.setMethodCallHandler(new EpubKittyPlugin());
         new EventChannel(messenger,PAGE_CHANNEL).setStreamHandler(new EventChannel.StreamHandler() {
             @Override
             public void onListen(Object o, EventChannel.EventSink eventSink) {
