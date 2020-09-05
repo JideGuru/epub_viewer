@@ -1,4 +1,4 @@
-package com.xiaofwang.epub_kitty;
+package com.jideguru.epub_reader;
 
 import android.app.Activity;
 import android.content.Context;
@@ -12,8 +12,8 @@ import io.flutter.plugin.common.MethodChannel.MethodCallHandler;
 import io.flutter.plugin.common.MethodChannel.Result;
 import io.flutter.plugin.common.PluginRegistry.Registrar;
 
-/** EpubKittyPlugin */
-public class EpubKittyPlugin implements MethodCallHandler {
+/** EpubReaderPlugin */
+public class EpubReaderPlugin implements MethodCallHandler {
 
   private Reader reader;
   private ReaderConfig config;
@@ -29,8 +29,8 @@ public class EpubKittyPlugin implements MethodCallHandler {
     activity = registrar.activity();
     messenger = registrar.messenger();
 
-    final MethodChannel channel = new MethodChannel(registrar.messenger(), "epub_kitty");
-    channel.setMethodCallHandler(new EpubKittyPlugin());
+    final MethodChannel channel = new MethodChannel(registrar.messenger(), "epub_reader");
+    channel.setMethodCallHandler(new EpubReaderPlugin());
   }
 
   @Override

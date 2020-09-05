@@ -19,10 +19,8 @@ dev_dependencies:
   build_runner: ^1.10.0
   hive_generator: ^0.5.0
 
-  epub_kitty:
+  epub_reader:
     path: ../
-
-  path_provider: ^1.4.0
 
 
 # For information on the generic Dart part of this file, see the

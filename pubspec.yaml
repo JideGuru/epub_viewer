@@ -1,8 +1,10 @@
-name: epub_kitty
+name: epub_reader
 description: 
-  'epub_kitty is an epub ebook reader that encapsulates the folioreader framework.'
-version: 0.1.7
-homepage: https://github.com/451518849/epub_kitty
+  'epub_reader is an epub ebook reader that encapsulates the folioreader framework.'
+version: 0.0.1
+authors:
+  - JideGuru (https://github.com/JideGuru)
+homepage: https://github.com/JideGuru/epub_reader
 
 environment:
   sdk: ">=2.1.0 <3.0.0"
@@ -25,8 +27,8 @@ flutter:
   # be modified. They are used by the tooling to maintain consistency when
   # adding or updating assets for this project.
   plugin:
-    androidPackage: com.xiaofwang.epub_kitty
-    pluginClass: EpubKittyPlugin
+    androidPackage: com.jideguru.epub_reader
+    pluginClass: EpubReaderPlugin
 
   # To add assets to your plugin package, add an assets section, like this:
   # assets:

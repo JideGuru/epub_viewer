@@ -2,8 +2,8 @@ import 'dart:convert';
 
 import 'package:flutter/services.dart';
 
-class EpubKitty {
-  static const MethodChannel _channel = const MethodChannel('epub_kitty');
+class EpubReader {
+  static const MethodChannel _channel = const MethodChannel('epub_reader');
   static const EventChannel _pageChannel = const EventChannel('page');
 
   /// @param identifier unique key for epub
@@ -30,7 +30,7 @@ class EpubKitty {
     await _channel.invokeMethod('open', agrs);
   }
 
-  static Stream get timerStream {
+  static Stream get locatorStream {
     Stream pageStream =
         _pageChannel.receiveBroadcastStream().map((value) => value);
 

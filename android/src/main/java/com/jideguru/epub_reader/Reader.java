@@ -1,4 +1,4 @@
-package com.xiaofwang.epub_kitty;
+package com.jideguru.epub_reader;
 
 import android.content.Context;
 import android.util.Log;
@@ -25,7 +25,7 @@ import io.flutter.plugin.common.BinaryMessenger;
 import io.flutter.plugin.common.EventChannel;
 import io.flutter.plugin.common.MethodChannel;
 
-public class Reader  implements OnHighlightListener, ReadLocatorListener, FolioReader.OnClosedListener{
+public class Reader implements OnHighlightListener, ReadLocatorListener, FolioReader.OnClosedListener{
 
     private ReaderConfig readerConfig;
     public FolioReader folioReader;
@@ -163,10 +163,6 @@ public class Reader  implements OnHighlightListener, ReadLocatorListener, FolioR
 
     @Override
     public void saveReadLocator(ReadLocator readLocator) {
-        Log.e("readLocator","readLocator path:"+readLocator.getLocations().getXpath());
-        Log.e("readLocator","readLocator positoin:"+readLocator.getLocations().getPosition());
-        Log.e("readLocator","readLocator progress:"+readLocator.getLocations().getProgression());
-        Log.e("readLocator","readLocator id:"+readLocator.getLocations().getId());
         Log.i("readLocator", "-> saveReadLocator -> " + readLocator.toJson());
 
         if (pageEventSink != null){

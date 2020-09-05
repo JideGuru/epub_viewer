@@ -183,7 +183,7 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "3.0.10"
-  epub_kitty:
+  epub_reader:
     dependency: "direct dev"
     description:
       path: ".."
