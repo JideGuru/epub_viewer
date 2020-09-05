@@ -1,10 +1,11 @@
 # epub_reader
 
-a fork of [epub_kityy](https://github.com/451518849/epub_kitty) with few more features.
 ![](https://img.shields.io/badge/build-passing-brightgreen)
 ![](https://img.shields.io/badge/version-0.0.1-orange)
 ![](https://img.shields.io/badge/platform-flutter-lightgrey)
 
+
+a fork of [epub_kitty](https://github.com/451518849/epub_kitty) with few more features.
 
 ![](1.jpeg)
 ![](2.jpeg)
