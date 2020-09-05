@@ -2,7 +2,7 @@ import Flutter
 import UIKit
 import epub_kitty_ios
 
-public class SwiftEpubKittyPlugin: NSObject, FlutterPlugin,FolioReaderPageDelegate,FlutterStreamHandler {
+public class SwiftEpubReaderPlugin: NSObject, FlutterPlugin,FolioReaderPageDelegate,FlutterStreamHandler {
     
     let folioReader = FolioReader()
     static var pageResult: FlutterResult? = nil
@@ -13,8 +13,8 @@ public class SwiftEpubKittyPlugin: NSObject, FlutterPlugin,FolioReaderPageDelega
     
     //12.13
     public static func register(with registrar: FlutterPluginRegistrar) {
-      let channel = FlutterMethodChannel(name: "epub_kitty", binaryMessenger: registrar.messenger())
-      let instance = SwiftEpubKittyPlugin()
+      let channel = FlutterMethodChannel(name: "epub_reader", binaryMessenger: registrar.messenger())
+      let instance = SwiftEpubReaderPlugin()
         
       pageChannel = FlutterEventChannel.init(name: "com.xiaofwang.epub_reader/page",
                                   binaryMessenger: registrar.messenger());
@@ -54,12 +54,12 @@ public class SwiftEpubKittyPlugin: NSObject, FlutterPlugin,FolioReaderPageDelega
     }
       
       private func setPageHandler(){
-          SwiftEpubKittyPlugin.pageChannel?.setStreamHandler(self)
+          SwiftEpubReaderPlugin.pageChannel?.setStreamHandler(self)
 
       }
       
       public func onListen(withArguments arguments: Any?, eventSink events: @escaping FlutterEventSink) -> FlutterError? {
-          SwiftEpubKittyPlugin.pageResult = events
+          SwiftEpubReaderPlugin.pageResult = events
           return nil
       }
 
@@ -83,8 +83,8 @@ public class SwiftEpubKittyPlugin: NSObject, FlutterPlugin,FolioReaderPageDelega
           
           print("page.pageNumber:"+String(page.pageNumber))
 
-          if (SwiftEpubKittyPlugin.pageResult != nil){
-              SwiftEpubKittyPlugin.pageResult!(String(page.pageNumber))
+          if (SwiftEpubReaderPlugin.pageResult != nil){
+              SwiftEpubReaderPlugin.pageResult!(String(page.pageNumber))
           }
 
       }
