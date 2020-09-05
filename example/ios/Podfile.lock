@@ -1,0 +1,65 @@
+PODS:
+  - AEXML (4.3.3)
+  - epub_kitty (0.0.1):
+    - epub_kitty_ios (= 0.1.0)
+    - Flutter
+  - epub_kitty_ios (0.1.0):
+    - AEXML (= 4.3.3)
+    - FontBlaster (= 4.1.0)
+    - MenuItemKit (= 3.1.3)
+    - RealmSwift (= 3.17.3)
+    - SSZipArchive (= 2.1.1)
+    - ZFDragableModalTransition (= 0.6)
+  - Flutter (1.0.0)
+  - FontBlaster (4.1.0)
+  - MenuItemKit (3.1.3)
+  - path_provider (0.0.1):
+    - Flutter
+  - Realm (3.17.3):
+    - Realm/Headers (= 3.17.3)
+  - Realm/Headers (3.17.3)
+  - RealmSwift (3.17.3):
+    - Realm (= 3.17.3)
+  - SSZipArchive (2.1.1)
+  - ZFDragableModalTransition (0.6)
+
+DEPENDENCIES:
+  - epub_kitty (from `.symlinks/plugins/epub_kitty/ios`)
+  - Flutter (from `.symlinks/flutter/ios`)
+  - path_provider (from `.symlinks/plugins/path_provider/ios`)
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - AEXML
+    - epub_kitty_ios
+    - FontBlaster
+    - MenuItemKit
+    - Realm
+    - RealmSwift
+    - SSZipArchive
+    - ZFDragableModalTransition
+
+EXTERNAL SOURCES:
+  epub_kitty:
+    :path: ".symlinks/plugins/epub_kitty/ios"
+  Flutter:
+    :path: ".symlinks/flutter/ios"
+  path_provider:
+    :path: ".symlinks/plugins/path_provider/ios"
+
+SPEC CHECKSUMS:
+  AEXML: 601f41fcaa7bda7605cad153b0f43db9ec006c0f
+  epub_kitty: ce7eb23730a1b8865a09f52278e62e21a1804bbf
+  epub_kitty_ios: 0b9c1a496047dd170d30b320e3cdcc0d0e3278d1
+  Flutter: 0e3d915762c693b495b44d77113d4970485de6ec
+  FontBlaster: 127aa66419478d1c62926c7fdb39841633344a45
+  MenuItemKit: 0f850e630b0a3d2bd80fec54db87ce0d2077ada2
+  path_provider: fb74bd0465e96b594bb3b5088ee4a4e7bb1f2a9d
+  Realm: 5a1d9d47bfc101dd597668b1a8af4288a2557f6d
+  RealmSwift: b7fdc2d18616621c31df5c7a398a45a2163f8eb0
+  SSZipArchive: 14401ade5f8e82aba1ff03e9f88e9de60937ae60
+  ZFDragableModalTransition: 0d294eaaba6edfcb9839595de765f9ca06a4b524
+
+PODFILE CHECKSUM: a06005eaed3441d0e8e250aceeea558df7b17af2
+
+COCOAPODS: 1.7.5
