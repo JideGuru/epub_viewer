@@ -8,18 +8,18 @@ i made this out of epub_kitty because the author was inactive(he isn't merging P
 <table>
   <tr>
     <td align="center">
-      <img src="screenshots/1.jpg" width="250px">
+      <img src="https://github.com/JideGuru/epub_viewer/raw/master/screenshots/1.jpg" width="250px">
     </td>
     <td align="center">
-      <img src="screenshots/2.png" width="250px">
+      <img src="https://github.com/JideGuru/epub_viewer/raw/master/screenshots/2.png" width="250px">
     </td>
   </tr>
   <tr>
     <td align="center">
-       <img src="screenshots/3.jpg" width="250px">
+       <img src="https://github.com/JideGuru/epub_viewer/raw/master/screenshots/3.jpg" width="250px">
     </td>
     <td align="center">
-       <img src="screenshots/4.png" width="250px">
+       <img src="https://github.com/JideGuru/epub_viewer/raw/master/screenshots/4.png" width="250px">
     </td>
   </tr>
 </table>
