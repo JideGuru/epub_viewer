@@ -1,3 +1,7 @@
+## 0.0.6
+
+* Display ios header.
+
 ## 0.0.4
 
 * Updated documentation.

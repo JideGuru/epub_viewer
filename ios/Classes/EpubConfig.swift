@@ -32,13 +32,14 @@ class EpubConfig: NSObject {
     }
     
     private func readerConfiguration() {
-        self.config.shouldHideNavigationOnTap = true
+        self.config.shouldHideNavigationOnTap = false
         self.config.scrollDirection = self.scrollDirection
         self.config.enableTTS = false
         self.config.displayTitle = true
         self.config.allowSharing = self.allowSharing
         self.config.tintColor = self.tintColor
         self.config.canChangeFontStyle = false
+        self.config.hideBars = false
         // Custom sharing quote background
         self.config.quoteCustomBackgrounds = []
         if let image = UIImage(named: "demo-bg") {
