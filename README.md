@@ -25,7 +25,7 @@ i made this out of epub_kitty because the author was inactive(he isn't merging P
 </table>
 
 
-epub_reader is an epub ebook reader that encapsulates the [folioreader](https://folioreader.github.io/FolioReaderKit/) framework.
+epub_viewer is an epub ebook reader that encapsulates the [folioreader](https://folioreader.github.io/FolioReaderKit/) framework.
   It supports iOS and android, but is customizable on iOS. 
   It is very easy to use, you just need to set up the configuration file can open the ebook, very convenient.
   However, it is not yet highly customizable on android.
