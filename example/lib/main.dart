@@ -55,10 +55,11 @@ class _MyAppState extends State<MyApp> {
                     print(iosBookPath);
                     String androidBookPath = 'file:///android_asset/3.epub';
                     EpubViewer.setConfig(
-                      "iosBook",
-                      Theme.of(context).primaryColor,
-                      EpubScrollDirection.VERTICAL,
-                      true,
+                      themeColor: Theme.of(context).primaryColor,
+                      identifier: "iosBook",
+                      scrollDirection: EpubScrollDirection.ALLDIRECTIONS,
+                      allowSharing: true,
+                      enableTts: true,
                     );
                     EpubViewer.open(
                       Platform.isAndroid ? androidBookPath : iosBookPath,

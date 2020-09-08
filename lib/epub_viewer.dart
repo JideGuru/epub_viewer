@@ -15,15 +15,23 @@ class EpubViewer {
   static const EventChannel _pageChannel = const EventChannel('page');
 
   /// Configure Viewer's with available values
-  static void setConfig(String identifier, Color themeColor,
-      EpubScrollDirection scrollDirection, bool allowSharing) async {
+  ///
+  /// themeColor is the color of the reader
+  /// scrollDirection uses the [EpubScrollDirection] enum
+  /// allowSharing
+  /// enableTts is an option to enable the inbuilt Text-to-Speech
+  static void setConfig(
+      {Color themeColor = Colors.blue,
+      String identifier = 'book',
+      EpubScrollDirection scrollDirection = EpubScrollDirection.ALLDIRECTIONS,
+      bool allowSharing = false,
+      bool enableTts = false}) async {
     Map<String, dynamic> agrs = {
       "identifier": identifier,
       "themeColor": Util.getHexFromColor(themeColor),
-      "scrollDirection": scrollDirection == EpubScrollDirection.HORIZONTAL
-          ? 'horizontal'
-          : 'vertical',
+      "scrollDirection": Util.getDirection(scrollDirection),
       "allowSharing": allowSharing,
+      'enableTts': enableTts,
     };
     await _channel.invokeMethod('setConfig', agrs);
   }
@@ -33,9 +41,8 @@ class EpubViewer {
   static void open(String bookPath, {EpubLocator lastLocation}) async {
     Map<String, dynamic> agrs = {
       "bookPath": bookPath,
-      'lastLocation': lastLocation == null
-          ? ''
-          : jsonEncode(lastLocation.toJson()),
+      'lastLocation':
+          lastLocation == null ? '' : jsonEncode(lastLocation.toJson()),
     };
     await _channel.invokeMethod('open', agrs);
   }

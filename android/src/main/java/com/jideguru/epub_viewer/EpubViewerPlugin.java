@@ -42,7 +42,9 @@ public class EpubViewerPlugin implements MethodCallHandler {
       String themeColor = arguments.get("themeColor").toString();
       String scrollDirection = arguments.get("scrollDirection").toString();
       Boolean allowSharing = Boolean.parseBoolean(arguments.get("allowSharing").toString());
-      config = new ReaderConfig(context,identifier,themeColor,scrollDirection,allowSharing);
+      Boolean enableTts = Boolean.parseBoolean(arguments.get("enableTts").toString());
+      config = new ReaderConfig(context,identifier,themeColor,
+              scrollDirection,allowSharing, enableTts);
 
     } else if (call.method.equals("open")){
 

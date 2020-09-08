@@ -32,8 +32,10 @@ public class SwiftEpubViewerPlugin: NSObject, FlutterPlugin,FolioReaderPageDeleg
         let scrollDirection = arguments["scrollDirection"] as! String
         let color = arguments["themeColor"] as! String
         let allowSharing = arguments["allowSharing"] as! Bool
+        let enableTts = arguments["enableTts"] as! Bool
 
-        self.config = EpubConfig.init(Identifier: Identifier,tintColor: color,allowSharing: allowSharing,scrollDirection: scrollDirection)
+        self.config = EpubConfig.init(Identifier: Identifier,tintColor: color,allowSharing:
+            allowSharing,scrollDirection: scrollDirection, enableTts: enableTts)
 
         break
       case "open":

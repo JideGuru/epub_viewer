@@ -16,19 +16,24 @@ class EpubConfig: NSObject {
     open var allowSharing: Bool = false
     open var scrollDirection: FolioReaderScrollDirection = FolioReaderScrollDirection.vertical
     
-    init(Identifier: String,tintColor: String, allowSharing: Bool,scrollDirection: String) {
+    init(Identifier: String,tintColor: String, allowSharing: Bool,
+            scrollDirection: String, enableTts: Bool) {
         self.config = FolioReaderConfig(withIdentifier: Identifier)
         self.tintColor = UIColor.init(rgba: tintColor)
         self.allowSharing = allowSharing
+        self.config.canChangeScrollDirection = false
         if scrollDirection == "vertical"{
             self.config.scrollDirection = FolioReaderScrollDirection.vertical
-        }else {
+        }else if (scrollDirection == "horizontal"){
             self.config.scrollDirection = FolioReaderScrollDirection.horizontal
+        }else{
+            self.config.canChangeScrollDirection = true
         }
+        self.config.enableTTS = enableTts
+        self.config.hidePageIndicator = false
         super.init()
         
         self.readerConfiguration()
-
     }
     
     private func readerConfiguration() {

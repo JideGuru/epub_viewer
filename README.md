@@ -1,7 +1,7 @@
 # Epub Viewer [![pub package](https://img.shields.io/pub/v/epub_viewer.svg)](https://pub.dartlang.org/packages/epub_viewer)
 
 
-a fork of [epub_kitty](https://github.com/451518849/epub_kitty) with few more features.
+originally a fork of [epub_kitty](https://github.com/451518849/epub_kitty) with few more features.
 i made this out of epub_kitty because the author was inactive(he isn't merging PRs or attending to issues) and i started having alot of issues with the plugin
 
 ## ScreenShots
@@ -43,33 +43,28 @@ dependencies:
 
 ## Usage
 ```dart
-/**
-* @identifier (android useless)
-* @themeColor
-* @scrollDirection (android useless)
-* @allowSharing (android useless)
-*/
 EpubViewer.setConfig(
-  "iosBook",
-  Color(0xff32a852),
-  EpubScrollDirection.HORIZONTAL,
-  true,
-);
+  themeColor: Theme.of(context).primaryColor,
+  identifier: "iosBook",
+  scrollDirection: EpubScrollDirection.VERTICAL,
+  allowSharing: true,
+  enableTts: true,
+)
 
 /**
 * @bookPath
 * @lastLocation (optional and only android)
 */
 EpubViewer.open(
-    'bookPath',
-    lastLocation: EpubLocator.fromJson({
-       "bookId": "2239",
-       "href": "/OEBPS/ch06.xhtml",
-       "created": 1539934158390,
-       "locations": {
-           "cfi": "epubcfi(/0!/4/4[simple_book]/2/2/6)"
-       }
-    }), // first page will open up if the value is null
+  'bookPath',
+  lastLocation: EpubLocator.fromJson({
+    "bookId": "2239",
+    "href": "/OEBPS/ch06.xhtml",
+    "created": 1539934158390,
+    "locations": {
+       "cfi": "epubcfi(/0!/4/4[simple_book]/2/2/6)"
+    }
+  }), // first page will open up if the value is null
 );
 
 // Get locator which you can save in your database
