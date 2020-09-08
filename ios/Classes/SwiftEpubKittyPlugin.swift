@@ -40,8 +40,7 @@ public class SwiftEpubViewerPlugin: NSObject, FlutterPlugin,FolioReaderPageDeleg
           setPageHandler()
           let arguments = call.arguments as![String:Any]
           let bookPath = arguments["bookPath"] as! String
-          let location = arguments["lastLocation"] as! String
-          self.open(epubPath: bookPath, location: location)
+          self.open(epubPath: bookPath)
 
           break
       case "close":
@@ -68,7 +67,7 @@ public class SwiftEpubViewerPlugin: NSObject, FlutterPlugin,FolioReaderPageDeleg
       }
       
       
-      fileprivate func open(epubPath: String, location: String) {
+      fileprivate func open(epubPath: String) {
            if epubPath == "" {
               return
           }

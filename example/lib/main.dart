@@ -16,13 +16,13 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  bool loading = true;
+  bool loading = false;
   Dio dio = new Dio();
 
   @override
   void initState() {
     super.initState();
-    download();
+//    download();
   }
 
   download() async {
@@ -44,29 +44,34 @@ class _MyAppState extends State<MyApp> {
         body: Center(
           child: loading
               ? CircularProgressIndicator()
-              : GestureDetector(
-                  onTap: () async {
+              : FlatButton(
+                  onPressed: () async {
                     Directory appDocDir =
                         await getApplicationDocumentsDirectory();
                     print('$appDocDir');
 
                     String iosBookPath = '${appDocDir.path}/chair.epub';
                     String androidBookPath = 'file:///android_asset/3.epub';
-                    EpubViewer.setConfig("iosBook", "#32a852", "vertical", true);
+                    EpubViewer.setConfig(
+                      "iosBook",
+                      Color(0xff32a852),
+                      EpubScrollDirection.HORIZONTAL,
+                      true,
+                    );
                     EpubViewer.open(
                       Platform.isAndroid ? androidBookPath : iosBookPath,
-                      lastLocation: {
+                      lastLocation: EpubLocator.fromJson({
                         "bookId": "2239",
                         "href": "/OEBPS/ch06.xhtml",
                         "created": 1539934158390,
                         "locations": {
                           "cfi": "epubcfi(/0!/4/4[simple_book]/2/2/6)"
                         }
-                      },
+                      }),
                     );
                     // get current locator
-                    EpubViewer.locatorStream.listen((event) {
-                      print('EVENT: $event');
+                    EpubViewer.locatorStream.listen((locator) {
+                      print('LOCATOR: ${locator.toJson() }');
                     });
                   },
                   child: Container(
@@ -97,8 +102,8 @@ class _MyAppState extends State<MyApp> {
         : await getApplicationDocumentsDirectory();
 
     String path = appDocDir.path + '/chair.epub';
-    print(path);
     File file = File(path);
+    await file.delete();
 
     if (!File(path).existsSync()) {
       await file.create();

@@ -1,6 +1,14 @@
 import 'dart:convert';
+import 'dart:io';
 
+import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+
+part 'model/enum/epub_scroll_direction.dart';
+
+part 'model/epub_locator.dart';
+
+part 'utils/util.dart';
 
 class EpubViewer {
   static const MethodChannel _channel = const MethodChannel('epub_viewer');
@@ -10,29 +18,34 @@ class EpubViewer {
   /// @param themeColor
   /// @param scrollDirection
   /// @param allowSharing
-  static void setConfig(String identifier, String themeColor,
-      String scrollDirection, bool allowSharing) async {
+  static void setConfig(String identifier, Color themeColor,
+      EpubScrollDirection scrollDirection, bool allowSharing) async {
     Map<String, dynamic> agrs = {
       "identifier": identifier,
-      "themeColor": themeColor,
-      "scrollDirection": scrollDirection,
+      "themeColor": Util.getHexFromColor(themeColor),
+      "scrollDirection": scrollDirection == EpubScrollDirection.HORIZONTAL
+          ? 'horizontal'
+          : 'vertical',
       "allowSharing": allowSharing,
     };
     await _channel.invokeMethod('setConfig', agrs);
   }
 
   /// @param bookPath the local path in cache
-  static void open(String bookPath, {Map lastLocation}) async {
+  static void open(String bookPath, {EpubLocator lastLocation}) async {
+    print(lastLocation.toString());
     Map<String, dynamic> agrs = {
       "bookPath": bookPath,
-      'lastLocation': jsonEncode(lastLocation),
+      'lastLocation': lastLocation.toString(),
     };
     await _channel.invokeMethod('open', agrs);
   }
 
-  static Stream get locatorStream {
-    Stream pageStream =
-        _pageChannel.receiveBroadcastStream().map((value) => value);
+  static Stream<EpubLocator> get locatorStream {
+    Stream pageStream = _pageChannel.receiveBroadcastStream().map((value) =>
+        Platform.isAndroid
+            ? EpubLocator.fromJson(jsonDecode(value))
+            : EpubLocator());
 
     return pageStream;
   }
