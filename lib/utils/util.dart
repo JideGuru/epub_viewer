@@ -6,6 +6,7 @@ class Util {
         .toString()
         .replaceAll('Color(0x', '')
         .replaceAll(')', '')
+        .replaceAll('MaterialColor(primary value: ', '')
         .trim()}';
   }
 }

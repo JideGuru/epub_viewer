@@ -58,7 +58,7 @@ public class Reader implements OnHighlightListener, ReadLocatorListener, FolioRe
             public void run() {
                try {
                    Log.i("SavedLocation", "-> savedLocation -> " + location);
-                   if(location != null){
+                   if(location != null && !location.isEmpty()){
                        ReadLocator readLocator = ReadLocator.fromJson(location);
                        folioReader.setReadLocator(readLocator);
                    }

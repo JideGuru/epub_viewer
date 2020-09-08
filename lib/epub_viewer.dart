@@ -33,7 +33,9 @@ class EpubViewer {
   static void open(String bookPath, {EpubLocator lastLocation}) async {
     Map<String, dynamic> agrs = {
       "bookPath": bookPath,
-      'lastLocation': jsonEncode(lastLocation.toJson()),
+      'lastLocation': lastLocation == null
+          ? ''
+          : jsonEncode(lastLocation.toJson()),
     };
     await _channel.invokeMethod('open', agrs);
   }
