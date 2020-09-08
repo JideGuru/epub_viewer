@@ -62,14 +62,14 @@ class _MyAppState extends State<MyApp> {
                     );
                     EpubViewer.open(
                       Platform.isAndroid ? androidBookPath : iosBookPath,
-//                      lastLocation: EpubLocator.fromJson({
-//                        "bookId": "2239",
-//                        "href": "/OEBPS/ch06.xhtml",
-//                        "created": 1539934158390,
-//                        "locations": {
-//                          "cfi": "epubcfi(/0!/4/4[simple_book]/2/2/6)"
-//                        }
-//                      }),
+                      lastLocation: EpubLocator.fromJson({
+                        "bookId": "2239",
+                        "href": "/OEBPS/ch06.xhtml",
+                        "created": 1539934158390,
+                        "locations": {
+                          "cfi": "epubcfi(/0!/4/4[simple_book]/2/2/6)"
+                        }
+                      }),
                     );
                     // get current locator
                     EpubViewer.locatorStream.listen((locator) {
