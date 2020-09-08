@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:dio/dio.dart';
@@ -71,7 +72,7 @@ class _MyAppState extends State<MyApp> {
                     );
                     // get current locator
                     EpubViewer.locatorStream.listen((locator) {
-                      print('LOCATOR: ${locator.toJson() }');
+                      print('LOCATOR: ${EpubLocator.fromJson(jsonDecode(locator))}');
                     });
                   },
                   child: Container(

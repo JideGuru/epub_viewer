@@ -1,6 +1,3 @@
-import 'dart:convert';
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -33,19 +30,16 @@ class EpubViewer {
 
   /// @param bookPath the local path in cache
   static void open(String bookPath, {EpubLocator lastLocation}) async {
-    print(lastLocation.toString());
     Map<String, dynamic> agrs = {
       "bookPath": bookPath,
-      'lastLocation': lastLocation.toString(),
+      'lastLocation': lastLocation.toJson(),
     };
     await _channel.invokeMethod('open', agrs);
   }
 
-  static Stream<EpubLocator> get locatorStream {
-    Stream pageStream = _pageChannel.receiveBroadcastStream().map((value) =>
-        Platform.isAndroid
-            ? EpubLocator.fromJson(jsonDecode(value))
-            : EpubLocator());
+  static Stream get locatorStream {
+    Stream pageStream =
+        _pageChannel.receiveBroadcastStream().map((value) => value);
 
     return pageStream;
   }
