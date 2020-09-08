@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -13,10 +14,7 @@ class EpubViewer {
   static const MethodChannel _channel = const MethodChannel('epub_viewer');
   static const EventChannel _pageChannel = const EventChannel('page');
 
-  /// @param identifier unique key for epub
-  /// @param themeColor
-  /// @param scrollDirection
-  /// @param allowSharing
+  /// Configure Viewer's with available values
   static void setConfig(String identifier, Color themeColor,
       EpubScrollDirection scrollDirection, bool allowSharing) async {
     Map<String, dynamic> agrs = {
@@ -30,7 +28,8 @@ class EpubViewer {
     await _channel.invokeMethod('setConfig', agrs);
   }
 
-  /// @param bookPath the local path in cache
+  /// bookPath should be a local file.
+  /// Last location is only available for android.
   static void open(String bookPath, {EpubLocator lastLocation}) async {
     Map<String, dynamic> agrs = {
       "bookPath": bookPath,
@@ -40,8 +39,9 @@ class EpubViewer {
   }
 
   static Stream get locatorStream {
-    Stream pageStream =
-        _pageChannel.receiveBroadcastStream().map((value) => value);
+    Stream pageStream = _pageChannel
+        .receiveBroadcastStream()
+        .map((value) => Platform.isAndroid ? value : '{}');
 
     return pageStream;
   }

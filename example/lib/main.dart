@@ -17,13 +17,13 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  bool loading = false;
+  bool loading = true;
   Dio dio = new Dio();
 
   @override
   void initState() {
     super.initState();
-//    download();
+    download();
   }
 
   download() async {
@@ -52,10 +52,11 @@ class _MyAppState extends State<MyApp> {
                     print('$appDocDir');
 
                     String iosBookPath = '${appDocDir.path}/chair.epub';
+                    print(iosBookPath);
                     String androidBookPath = 'file:///android_asset/3.epub';
                     EpubViewer.setConfig(
                       "iosBook",
-                      Color(0xff32a852),
+                      Theme.of(context).primaryColor,
                       EpubScrollDirection.VERTICAL,
                       true,
                     );
@@ -104,7 +105,7 @@ class _MyAppState extends State<MyApp> {
 
     String path = appDocDir.path + '/chair.epub';
     File file = File(path);
-    await file.delete();
+//    await file.delete();
 
     if (!File(path).existsSync()) {
       await file.create();
