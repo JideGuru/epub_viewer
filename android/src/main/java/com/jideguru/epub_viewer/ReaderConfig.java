@@ -24,13 +24,13 @@ public class ReaderConfig {
         Log.e("Reader", "scrollDirection.equals(\"vertical\") " + scrollDirection);
         Log.e("Reader", "scrollDirection.equals(\"vertical\") " + scrollDirection.equals("vertical"));
 
-        config.setAllowedDirection(Config.AllowedDirection.VERTICAL_AND_HORIZONTAL);
+//        config.setAllowedDirection(Config.AllowedDirection.VERTICAL_AND_HORIZONTAL);
 
-//        if (scrollDirection.equals("vertical")){
-//            config.setAllowedDirection(Config.AllowedDirection.ONLY_VERTICAL);
-//        }else {
-//            config.setAllowedDirection(Config.AllowedDirection.ONLY_HORIZONTAL);
-//        }
+        if (scrollDirection.equals("vertical")){
+            config.setAllowedDirection(Config.AllowedDirection.ONLY_VERTICAL);
+        }else {
+            config.setAllowedDirection(Config.AllowedDirection.ONLY_HORIZONTAL);
+        }
         config.setThemeColorInt(Color.parseColor(themeColor));
     }
 }

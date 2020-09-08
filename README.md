@@ -74,7 +74,7 @@ EpubViewer.open(
 
 // Get locator which you can save in your database
 EpubViewer.locatorStream.listen((locator) {
-   print('LOCATOR: ${locator.toJson()}');
+   print('LOCATOR: ${EpubLocator.fromJson(jsonDecode(locator))}');
    // convert locator from string to json and save to your database to be retrieved later
 });
 ```

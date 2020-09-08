@@ -56,7 +56,7 @@ class _MyAppState extends State<MyApp> {
                     EpubViewer.setConfig(
                       "iosBook",
                       Color(0xff32a852),
-                      EpubScrollDirection.HORIZONTAL,
+                      EpubScrollDirection.VERTICAL,
                       true,
                     );
                     EpubViewer.open(
