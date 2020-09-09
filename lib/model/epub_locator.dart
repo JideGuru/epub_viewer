@@ -1,5 +1,6 @@
 part of 'package:epub_viewer/epub_viewer.dart';
 
+/// Model fo android EpubLocator
 class EpubLocator {
   String bookId;
   String href;
@@ -29,6 +30,7 @@ class EpubLocator {
   }
 }
 
+/// Model for Locations in [EpubLocator]
 class Locations {
   String cfi;
 

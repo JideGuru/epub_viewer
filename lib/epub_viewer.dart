@@ -47,6 +47,7 @@ class EpubViewer {
     await _channel.invokeMethod('open', agrs);
   }
 
+  /// Stream to get EpubLocator for android and pageNumber for iOS
   static Stream get locatorStream {
     Stream pageStream = _pageChannel
         .receiveBroadcastStream()

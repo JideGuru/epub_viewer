@@ -4,10 +4,7 @@ class Util {
   /// Get HEX code from [Colors], [MaterialColor],
   /// [Color] and [MaterialAccentColor]
   static String getHexFromColor(Color color) {
-    return '#${color.toString().replaceAll('Color(0xff', '').replaceAll(
-        'MaterialColor(', '').replaceAll('MaterialAccentColor(', '').replaceAll(
-        'primary value: Color(0xff', '').replaceAll('primary', '').replaceAll(
-        'value:', '').replaceAll(')', '').trim()}';
+    return '#${color.toString().replaceAll('ColorSwatch(', '').replaceAll('Color(0xff', '').replaceAll('MaterialColor(', '').replaceAll('MaterialAccentColor(', '').replaceAll('primary value: Color(0xff', '').replaceAll('primary', '').replaceAll('value:', '').replaceAll(')', '').trim()}';
   }
 
   /// Convert [EpubScrollDirection] to FolioReader reader String
