@@ -9,22 +9,22 @@ epub_viewer is an epub ebook reader that encapsulates the [folioreader](https://
 
 ## ScreenShots
 <a href="#screenshots">
-  <img src="https://github.com/JideGuru/epub_viewer/raw/master/screenshots/1.png" width="200px">
+  <img src="https://raw.githubusercontent.com/JideGuru/epub_viewer/master/screenshots/1.png" width="200px">
 </a>&nbsp;&nbsp;
 <a href="#screenshots">
-  <img src="https://github.com/JideGuru/epub_viewer/raw/master/screenshots/2.png" width="200px">
+  <img src="https://raw.githubusercontent.com/JideGuru/epub_viewer/master/screenshots/2.png" width="200px">
 </a>&nbsp;&nbsp;
 <a href="#screenshots">
-  <img src="https://github.com/JideGuru/epub_viewer/raw/master/screenshots/3.png" width="200px">
+  <img src="https://raw.githubusercontent.com/JideGuru/epub_viewer/master/screenshots/3.png" width="200px">
 </a>&nbsp;&nbsp;
 <a href="#screenshots">
-  <img src="https://github.com/JideGuru/epub_viewer/raw/master/screenshots/4.png" width="200px">
+  <img src="https://raw.githubusercontent.com/JideGuru/epub_viewer/master/screenshots/4.png" width="200px">
 </a>&nbsp;&nbsp;
 <a href="#screenshots">
-  <img src="https://github.com/JideGuru/epub_viewer/raw/master/screenshots/5.png" width="200px">
+  <img src="https://raw.githubusercontent.com/JideGuru/epub_viewer/master/screenshots/5.png" width="200px">
 </a>&nbsp;&nbsp;
 <a href="#screenshots">
-  <img src="https://github.com/JideGuru/epub_viewer/raw/master/screenshots/6.png" width="200px">
+  <img src="https://raw.githubusercontent.com/JideGuru/epub_viewer/master/screenshots/6.png" width="200px">
 </a>&nbsp;&nbsp;
 
 ## Install'
