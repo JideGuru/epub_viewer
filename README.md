@@ -4,29 +4,28 @@
 originally a fork of [epub_kitty](https://github.com/451518849/epub_kitty) with few more features.
 i made this out of epub_kitty because the author was inactive(he isn't merging PRs or attending to issues) and i started having alot of issues with the plugin
 
-## ScreenShots
-<table>
-  <tr>
-    <td align="center">
-      <img src="https://github.com/JideGuru/epub_viewer/raw/master/screenshots/1.jpg" width="250px">
-    </td>
-    <td align="center">
-      <img src="https://github.com/JideGuru/epub_viewer/raw/master/screenshots/2.png" width="250px">
-    </td>
-  </tr>
-  <tr>
-    <td align="center">
-       <img src="https://github.com/JideGuru/epub_viewer/raw/master/screenshots/3.jpg" width="250px">
-    </td>
-    <td align="center">
-       <img src="https://github.com/JideGuru/epub_viewer/raw/master/screenshots/4.png" width="250px">
-    </td>
-  </tr>
-</table>
-
-
 epub_viewer is an epub ebook reader that encapsulates the [folioreader](https://folioreader.github.io/FolioReaderKit/) framework.
   It supports iOS and android.
+
+## ScreenShots
+<a href="#screenshots">
+  <img src="https://github.com/JideGuru/epub_viewer/raw/master/screenshots/1.png" width="200px">
+</a>&nbsp;&nbsp;
+<a href="#screenshots">
+  <img src="https://github.com/JideGuru/epub_viewer/raw/master/screenshots/2.png" width="200px">
+</a>&nbsp;&nbsp;
+<a href="#screenshots">
+  <img src="https://github.com/JideGuru/epub_viewer/raw/master/screenshots/3.png" width="200px">
+</a>&nbsp;&nbsp;
+<a href="#screenshots">
+  <img src="https://github.com/JideGuru/epub_viewer/raw/master/screenshots/4.png" width="200px">
+</a>&nbsp;&nbsp;
+<a href="#screenshots">
+  <img src="https://github.com/JideGuru/epub_viewer/raw/master/screenshots/5.png" width="200px">
+</a>&nbsp;&nbsp;
+<a href="#screenshots">
+  <img src="https://github.com/JideGuru/epub_viewer/raw/master/screenshots/6.png" width="200px">
+</a>&nbsp;&nbsp;
 
 ## Install'
 This plugin requires `Swift` to work on iOS.
