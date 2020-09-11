@@ -27,7 +27,15 @@ epub_viewer is an epub ebook reader that encapsulates the [folioreader](https://
   <img src="https://raw.githubusercontent.com/JideGuru/epub_viewer/master/screenshots/6.png" width="200px">
 </a>&nbsp;&nbsp;
 
-## Install'
+## Features
+| Name | Android | iOS |
+|------|-------|------|
+| Reading Time Left / Pages left | -[x] | -[x] |
+| Last Read Locator | -[x] | -[x] |
+| Distraction Free Reading | -[x] | -[ ] |
+| Load ePub from Asset | -[ ] | -[ ] |
+
+## Install
 This plugin requires `Swift` to work on iOS.
 Also, the minimum deployment target is 9.0
 ```
