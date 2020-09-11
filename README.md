@@ -30,10 +30,10 @@ epub_viewer is an epub ebook reader that encapsulates the [folioreader](https://
 ## Features
 | Name | Android | iOS |
 |------|-------|------|
-| Reading Time Left / Pages left | -[x] | -[x] |
-| Last Read Locator | -[x] | -[x] |
-| Distraction Free Reading | -[x] | -[ ] |
-| Load ePub from Asset | -[ ] | -[ ] |
+| Reading Time Left / Pages left | <ul><li>[x] </li></ul> | - [x] |
+| Last Read Locator | - [x] | - [x] |
+| Distraction Free Reading | - [x] | - [ ] |
+| Load ePub from Asset | - [ ] | - [ ] |
 
 ## Install
 This plugin requires `Swift` to work on iOS.
