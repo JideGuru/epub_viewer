@@ -22,7 +22,6 @@ public class ReaderConfig {
 //        config = AppUtil.getSavedConfig(context);
 //        if (config == null)
             config = new Config();
-
         if (scrollDirection.equals("vertical")){
             config.setAllowedDirection(Config.AllowedDirection.ONLY_VERTICAL);
         }else if(scrollDirection.equals("horizontal")){
@@ -31,7 +30,8 @@ public class ReaderConfig {
             config.setAllowedDirection(Config.AllowedDirection.VERTICAL_AND_HORIZONTAL);
         }
         config.setThemeColorInt(Color.parseColor(themeColor));
-        config.setShowTts(showTts);
+        config.setNightThemeColorInt(Color.parseColor(themeColor));
         config.setShowRemainingIndicator(true);
+        config.setShowTts(showTts);
     }
 }

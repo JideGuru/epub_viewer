@@ -8,19 +8,24 @@ epub_viewer is an epub ebook reader that encapsulates the [folioreader](https://
   It supports iOS and android.
 
 ## ScreenShots
-<a href="#">
-  <img src="https://github.com/JideGuru/epub_viewer/raw/master/screenshots/1.jpg" width="200px">
+<a href="#screenshots">
+  <img src="https://github.com/JideGuru/epub_viewer/raw/master/screenshots/1.png" width="200px">
 </a>&nbsp;&nbsp;
-<a href="#">
-  <img src="https://github.com/JideGuru/epub_viewer/raw/master/screenshots/3.jpg" width="200px">
-</a>&nbsp;&nbsp;
-<a href="#">
+<a href="#screenshots">
   <img src="https://github.com/JideGuru/epub_viewer/raw/master/screenshots/2.png" width="200px">
 </a>&nbsp;&nbsp;
-<a href="#">
+<a href="#screenshots">
+  <img src="https://github.com/JideGuru/epub_viewer/raw/master/screenshots/3.png" width="200px">
+</a>&nbsp;&nbsp;
+<a href="#screenshots">
   <img src="https://github.com/JideGuru/epub_viewer/raw/master/screenshots/4.png" width="200px">
 </a>&nbsp;&nbsp;
-
+<a href="#screenshots">
+  <img src="https://github.com/JideGuru/epub_viewer/raw/master/screenshots/5.png" width="200px">
+</a>&nbsp;&nbsp;
+<a href="#screenshots">
+  <img src="https://github.com/JideGuru/epub_viewer/raw/master/screenshots/6.png" width="200px">
+</a>&nbsp;&nbsp;
 
 ## Install'
 This plugin requires `Swift` to work on iOS.
