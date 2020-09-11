@@ -8,7 +8,7 @@ buildscript {
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.2.1'
+        classpath 'com.android.tools.build:gradle:4.0.1'
     }
 }
 
@@ -36,7 +36,7 @@ android {
 
 dependencies {
     configurations.matching { it.name == '_internal_aapt2_binary' }.all { config -> config.resolutionStrategy.eachDependency { details -> details.useVersion("3.3.2-5309881") } }
-    implementation "com.folioreader:folioreader:0.5.4"
+    implementation "com.jideguru:folioreader:0.5.4"
     implementation group: 'com.fasterxml.jackson.core', name: 'jackson-core', version: '2.9.8'
     implementation group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.9.7'
 }
