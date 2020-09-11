@@ -8,9 +8,7 @@ epub_viewer is an epub ebook reader that encapsulates the [folioreader](https://
   It supports iOS and android.
 
 ## ScreenShots
-<img src="https://github.com/JideGuru/epub_viewer/raw/master/screenshots/1.jpg" width="200px">
-<img src="https://github.com/JideGuru/epub_viewer/raw/master/screenshots/3.jpg" width="200px">
-<img src="https://github.com/JideGuru/epub_viewer/raw/master/screenshots/2.png" width="200px">
+<img src="https://github.com/JideGuru/epub_viewer/raw/master/screenshots/1.jpg" width="200px"><img src="https://github.com/JideGuru/epub_viewer/raw/master/screenshots/3.jpg" width="200px"><img src="https://github.com/JideGuru/epub_viewer/raw/master/screenshots/2.png" width="200px">
 <img src="https://github.com/JideGuru/epub_viewer/raw/master/screenshots/4.png" width="200px">
 
 <table>
