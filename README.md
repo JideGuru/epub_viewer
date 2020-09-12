@@ -7,6 +7,14 @@ i made this out of epub_kitty because the author was inactive(he isn't merging P
 epub_viewer is an epub ebook reader that encapsulates the [folioreader](https://folioreader.github.io/FolioReaderKit/) framework.
   It supports iOS and android.
 
+## Features
+| Name | Android | iOS |
+|------|-------|------|
+| Reading Time Left / Pages left | ✅ | ✅ |
+| Last Read Locator | ✅ | ✅ |
+| Distraction Free Reading | ✅ | ❌ |
+| Load ePub from Asset | ✅ | ✅ |
+
 ## ScreenShots
 <a href="#screenshots">
   <img src="https://raw.githubusercontent.com/JideGuru/epub_viewer/master/screenshots/1.png" width="200px">
@@ -26,14 +34,6 @@ epub_viewer is an epub ebook reader that encapsulates the [folioreader](https://
 <a href="#screenshots">
   <img src="https://raw.githubusercontent.com/JideGuru/epub_viewer/master/screenshots/6.png" width="200px">
 </a>&nbsp;&nbsp;
-
-## Features
-| Name | Android | iOS |
-|------|-------|------|
-| Reading Time Left / Pages left | ✅ | ✅ |
-| Last Read Locator | ✅ | ✅ |
-| Distraction Free Reading | ✅ | ❌ |
-| Load ePub from Asset | ✅ | ✅ |
 
 ## Install
 This plugin requires `Swift` to work on iOS.
