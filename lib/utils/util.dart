@@ -24,4 +24,15 @@ class Util {
         break;
     }
   }
+
+  /// Create a temporary [File] from an asset epub
+  /// to be opened by [EpubViewer]
+  static Future<File> getFileFromAsset(String asset) async {
+    ByteData data = await rootBundle.load(asset);
+    String dir = (await getTemporaryDirectory()).path;
+    String path = '$dir/${basename(asset)}';
+    final buffer = data.buffer;
+    return File(path).writeAsBytes(
+        buffer.asUint8List(data.offsetInBytes, data.lengthInBytes));
+  }
 }

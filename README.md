@@ -7,6 +7,14 @@ i made this out of epub_kitty because the author was inactive(he isn't merging P
 epub_viewer is an epub ebook reader that encapsulates the [folioreader](https://folioreader.github.io/FolioReaderKit/) framework.
   It supports iOS and android.
 
+## Features
+| Name | Android | iOS |
+|------|-------|------|
+| Reading Time Left / Pages left | ✅ | ✅ |
+| Last Read Locator | ✅ | ✅ |
+| Distraction Free Reading | ✅ | ❌ |
+| Load ePub from Asset | ✅ | ✅ |
+
 ## ScreenShots
 <a href="#screenshots">
   <img src="https://raw.githubusercontent.com/JideGuru/epub_viewer/master/screenshots/1.png" width="200px">
@@ -27,7 +35,7 @@ epub_viewer is an epub ebook reader that encapsulates the [folioreader](https://
   <img src="https://raw.githubusercontent.com/JideGuru/epub_viewer/master/screenshots/6.png" width="200px">
 </a>&nbsp;&nbsp;
 
-## Install'
+## Install
 This plugin requires `Swift` to work on iOS.
 Also, the minimum deployment target is 9.0
 ```
@@ -72,6 +80,28 @@ EpubViewer.locatorStream.listen((locator) {
    // convert locator from string to json and save to your database to be retrieved later
 });
 ```
+
+You can also load epub from your assets using `EpubViewer.openAsset()`
+
+```dart
+await EpubViewer.openAsset(
+  'assets/3.epub',
+  lastLocation: EpubLocator.fromJson({
+      "bookId": "2239",
+      "href": "/OEBPS/ch06.xhtml",
+      "created": 1539934158390,
+      "locations": {
+         "cfi": "epubcfi(/0!/4/4[simple_book]/2/2/6)"
+      }
+  }), // first page will open up if the value is null
+ );
+
+// Get locator which you can save in your database
+EpubViewer.locatorStream.listen((locator) {
+   print('LOCATOR: ${EpubLocator.fromJson(jsonDecode(locator))}');
+   // convert locator from string to json and save to your database to be retrieved later
+});
+ ```
 
 Check the [Sample](https://github.com/JideGuru/epub_viewer/tree/master/example) project or [this ebook app](https://github.com/JideGuru/FlutterEbookApp) for implementation
 ## Issues

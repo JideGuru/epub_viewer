@@ -3,6 +3,8 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:path/path.dart';
+import 'package:path_provider/path_provider.dart';
 
 part 'model/enum/epub_scroll_direction.dart';
 
@@ -45,6 +47,21 @@ class EpubViewer {
           lastLocation == null ? '' : jsonEncode(lastLocation.toJson()),
     };
     await _channel.invokeMethod('open', agrs);
+  }
+
+  /// bookPath should be an asset file path.
+  /// Last location is only available for android.
+  static Future openAsset(String bookPath, {EpubLocator lastLocation}) async {
+    if (extension(bookPath) == '.epub') {
+      Map<String, dynamic> agrs = {
+        "bookPath": (await Util.getFileFromAsset(bookPath)).path,
+        'lastLocation':
+            lastLocation == null ? '' : jsonEncode(lastLocation.toJson()),
+      };
+      await _channel.invokeMethod('open', agrs);
+    } else {
+      throw ('${extension(bookPath)} cannot be opened, use an EPUB File');
+    }
   }
 
   /// Stream to get EpubLocator for android and pageNumber for iOS
