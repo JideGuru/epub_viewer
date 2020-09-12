@@ -30,10 +30,10 @@ epub_viewer is an epub ebook reader that encapsulates the [folioreader](https://
 ## Features
 | Name | Android | iOS |
 |------|-------|------|
-| Reading Time Left / Pages left | <ul><li>[x] </li></ul> | - [x] |
-| Last Read Locator | - [x] | - [x] |
-| Distraction Free Reading | - [x] | - [ ] |
-| Load ePub from Asset | - [ ] | - [ ] |
+| Reading Time Left / Pages left | ✅ | ✅ |
+| Last Read Locator | ✅ | ✅ |
+| Distraction Free Reading | ✅ | ❌ |
+| Load ePub from Asset | ✅ | ✅ |
 
 ## Install
 This plugin requires `Swift` to work on iOS.
@@ -80,6 +80,28 @@ EpubViewer.locatorStream.listen((locator) {
    // convert locator from string to json and save to your database to be retrieved later
 });
 ```
+
+You can also load epub from your assets using `EpubViewer.openAsset()`
+
+```dart
+await EpubViewer.openAsset(
+  'assets/3.epub',
+  lastLocation: EpubLocator.fromJson({
+      "bookId": "2239",
+      "href": "/OEBPS/ch06.xhtml",
+      "created": 1539934158390,
+      "locations": {
+         "cfi": "epubcfi(/0!/4/4[simple_book]/2/2/6)"
+      }
+  }), // first page will open up if the value is null
+ );
+
+// Get locator which you can save in your database
+EpubViewer.locatorStream.listen((locator) {
+   print('LOCATOR: ${EpubLocator.fromJson(jsonDecode(locator))}');
+   // convert locator from string to json and save to your database to be retrieved later
+});
+ ```
 
 Check the [Sample](https://github.com/JideGuru/epub_viewer/tree/master/example) project or [this ebook app](https://github.com/JideGuru/FlutterEbookApp) for implementation
 ## Issues

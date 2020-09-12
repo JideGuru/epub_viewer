@@ -17,13 +17,13 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  bool loading = true;
+  bool loading = false;
   Dio dio = new Dio();
 
   @override
   void initState() {
     super.initState();
-    download();
+//    download();
   }
 
   download() async {
@@ -61,8 +61,20 @@ class _MyAppState extends State<MyApp> {
                       allowSharing: true,
                       enableTts: true,
                     );
-                    EpubViewer.open(
-                      Platform.isAndroid ? androidBookPath : iosBookPath,
+//                    EpubViewer.open(
+//                      Platform.isAndroid ? androidBookPath : iosBookPath,
+//                      lastLocation: EpubLocator.fromJson({
+//                        "bookId": "2239",
+//                        "href": "/OEBPS/ch06.xhtml",
+//                        "created": 1539934158390,
+//                        "locations": {
+//                          "cfi": "epubcfi(/0!/4/4[simple_book]/2/2/6)"
+//                        }
+//                      }),
+//                    );
+
+                    await EpubViewer.openAsset(
+                      'assets/3.epub',
                       lastLocation: EpubLocator.fromJson({
                         "bookId": "2239",
                         "href": "/OEBPS/ch06.xhtml",
