@@ -12,16 +12,12 @@ class Util {
     switch (direction) {
       case EpubScrollDirection.VERTICAL:
         return 'vertical';
-        break;
       case EpubScrollDirection.HORIZONTAL:
         return 'horizontal';
-        break;
       case EpubScrollDirection.ALLDIRECTIONS:
         return 'alldirections';
-        break;
       default:
         return 'alldirections';
-        break;
     }
   }
 
