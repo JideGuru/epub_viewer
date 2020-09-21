@@ -31,7 +31,7 @@ PODS:
 
 DEPENDENCIES:
   - epub_viewer (from `.symlinks/plugins/epub_viewer/ios`)
-  - Flutter (from `.symlinks/flutter/ios`)
+  - Flutter (from `Flutter`)
   - path_provider (from `.symlinks/plugins/path_provider/ios`)
   - path_provider_linux (from `.symlinks/plugins/path_provider_linux/ios`)
   - path_provider_macos (from `.symlinks/plugins/path_provider_macos/ios`)
@@ -52,7 +52,7 @@ EXTERNAL SOURCES:
   epub_viewer:
     :path: ".symlinks/plugins/epub_viewer/ios"
   Flutter:
-    :path: ".symlinks/flutter/ios"
+    :path: Flutter
   path_provider:
     :path: ".symlinks/plugins/path_provider/ios"
   path_provider_linux:
@@ -78,6 +78,6 @@ SPEC CHECKSUMS:
   SSZipArchive: 14401ade5f8e82aba1ff03e9f88e9de60937ae60
   ZFDragableModalTransition: 0d294eaaba6edfcb9839595de765f9ca06a4b524
 
-PODFILE CHECKSUM: a06005eaed3441d0e8e250aceeea558df7b17af2
+PODFILE CHECKSUM: 2609452b760cd11039b14039a86564367a3d8ab9
 
 COCOAPODS: 1.9.3
