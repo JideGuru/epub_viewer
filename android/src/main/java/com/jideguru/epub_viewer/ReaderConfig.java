@@ -18,7 +18,7 @@ public class ReaderConfig {
     public Config config;
 
     public ReaderConfig(Context context, String identifier, String themeColor,
-                        String scrollDirection, boolean allowSharing, boolean showTts boolean nightMode){
+                        String scrollDirection, boolean allowSharing, boolean showTts , boolean nightMode){
 
 //        config = AppUtil.getSavedConfig(context);
 //        if (config == null)
