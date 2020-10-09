@@ -1,6 +1,6 @@
 part of 'package:epub_viewer/epub_viewer.dart';
 
-/// Model fo android EpubLocator
+/// Model for android EpubLocator
 class EpubLocator {
   String bookId;
   String href;
