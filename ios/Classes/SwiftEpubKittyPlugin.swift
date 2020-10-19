@@ -1,6 +1,6 @@
 import Flutter
 import UIKit
-import epub_kitty_ios
+import EpubViewerKit
 
 public class SwiftEpubViewerPlugin: NSObject, FlutterPlugin,FolioReaderPageDelegate,FlutterStreamHandler {
     
@@ -76,8 +76,7 @@ public class SwiftEpubViewerPlugin: NSObject, FlutterPlugin,FolioReaderPageDeleg
           }
 
           let readerVc = UIApplication.shared.keyWindow!.rootViewController ?? UIViewController()
-
-        folioReader.presentReader(parentViewController: readerVc, withEpubPath: epubPath, andConfig: self.config!.config, shouldRemoveEpub: false)
+          folioReader.presentReader(parentViewController: readerVc, withEpubPath: epubPath, andConfig: self.config!.config, shouldRemoveEpub: false)
           folioReader.readerCenter?.pageDelegate = self
       }
 
