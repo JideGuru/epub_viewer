@@ -12,16 +12,16 @@ A new flutter plugin project.
   s.license          = { :file => '../LICENSE' }
   s.author           = { 'jideguru' => 'guruliciousjide@gmail.com' }
   s.source           = { :path => '.' }
-  
-  
+
+
   s.source_files = [
   'Classes/**/*',
   ]
 
   s.dependency 'Flutter'
-  
+
   s.dependency 'EpubViewerKit', '~> 0.1.1'
   s.ios.deployment_target = '9.0'
 
-  
+
 end
