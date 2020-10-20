@@ -1,27 +1,27 @@
 ## 0.1.8
 
-* Bug fixes
+- Bug fixes
 
 ## 0.0.8
 
-* Display ios header.
+- Display ios header.
 
 ## 0.0.6
 
-* Display ios header.
+- Display ios header.
 
 ## 0.0.4
 
-* Updated documentation.
+- Updated documentation.
 
 ## 0.0.3
 
-* Updated documentation.
+- Updated documentation.
 
 ## 0.0.2
 
-* removed unwanted files to make plugin lighter.
+- removed unwanted files to make plugin lighter.
 
 ## 0.0.1
 
-* initial release.
+- initial release.
