@@ -74,7 +74,7 @@ class _MyAppState extends State<MyApp> {
 //                    );
 
                     await EpubViewer.openAsset(
-                      'assets/alice.epub',
+                      'assets/4.epub',
                       lastLocation: EpubLocator.fromJson({
                         "bookId": "2239",
                         "href": "/OEBPS/ch06.xhtml",
