@@ -9,13 +9,13 @@ import UIKit
 import EpubViewerKit
 
 class EpubConfig: NSObject {
-    
+
     open var config: FolioReaderConfig!
-    
+
     open var tintColor: UIColor = UIColor.init(rgba:"#fdd82c")
     open var allowSharing: Bool = false
     open var scrollDirection: FolioReaderScrollDirection = FolioReaderScrollDirection.vertical
-    
+
     init(Identifier: String,tintColor: String, allowSharing: Bool,
             scrollDirection: String, enableTts: Bool, nightMode: Bool) {
         self.config = FolioReaderConfig(withIdentifier: Identifier)
@@ -32,10 +32,10 @@ class EpubConfig: NSObject {
         self.config.enableTTS = enableTts
         self.config.hidePageIndicator = false
         super.init()
-        
+
         self.readerConfiguration()
     }
-    
+
     private func readerConfiguration() {
         self.config.shouldHideNavigationOnTap = false
         self.config.scrollDirection = self.scrollDirection
@@ -57,7 +57,7 @@ class EpubConfig: NSObject {
         let customQuote = QuoteImage(withColor: customColor, alpha: 1.0, textColor: textColor)
         self.config.quoteCustomBackgrounds.append(customQuote)
     }
-      
+
 }
 
 
@@ -67,7 +67,7 @@ internal extension UIColor {
         var green: CGFloat = 0.0
         var blue:  CGFloat = 0.0
         var alpha: CGFloat = 1.0
-        
+
         if rgba.hasPrefix("#") {
             let index = rgba.index(rgba.startIndex, offsetBy: 1)
             let hex = String(rgba[index...])
@@ -109,7 +109,7 @@ internal extension UIColor {
         }
         self.init(red:red, green:green, blue:blue, alpha:alpha)
     }
-    
+
     //
     /// Hex string of a UIColor instance.
     ///
@@ -123,55 +123,55 @@ internal extension UIColor {
         var b: CGFloat = 0
         var a: CGFloat = 0
         self.getRed(&r, green: &g, blue: &b, alpha: &a)
-        
+
         if (includeAlpha == true) {
             return String(format: "#%02X%02X%02X%02X", Int(r * 255), Int(g * 255), Int(b * 255), Int(a * 255))
         } else {
             return String(format: "#%02X%02X%02X", Int(r * 255), Int(g * 255), Int(b * 255))
         }
     }
-    
+
     // MARK: - color shades
     // https://gist.github.com/mbigatti/c6be210a6bbc0ff25972
-    
+
     func highlightColor() -> UIColor {
-        
+
         var hue : CGFloat = 0
         var saturation : CGFloat = 0
         var brightness : CGFloat = 0
         var alpha : CGFloat = 0
-        
+
         if getHue(&hue, saturation: &saturation, brightness: &brightness, alpha: &alpha) {
             return UIColor(hue: hue, saturation: 0.30, brightness: 1, alpha: alpha)
         } else {
             return self;
         }
-        
+
     }
-    
+
     /**
      Returns a lighter color by the provided percentage
-     
+
      :param: lighting percent percentage
      :returns: lighter UIColor
      */
     func lighterColor(_ percent : Double) -> UIColor {
         return colorWithBrightnessFactor(CGFloat(1 + percent));
     }
-    
+
     /**
      Returns a darker color by the provided percentage
-     
+
      :param: darking percent percentage
      :returns: darker UIColor
      */
     func darkerColor(_ percent : Double) -> UIColor {
         return colorWithBrightnessFactor(CGFloat(1 - percent));
     }
-    
+
     /**
      Return a modified color using the brightness factor provided
-     
+
      :param: factor brightness factor
      :returns: modified color
      */
@@ -180,7 +180,7 @@ internal extension UIColor {
         var saturation : CGFloat = 0
         var brightness : CGFloat = 0
         var alpha : CGFloat = 0
-        
+
         if getHue(&hue, saturation: &saturation, brightness: &brightness, alpha: &alpha) {
             return UIColor(hue: hue, saturation: saturation, brightness: brightness * factor, alpha: alpha)
         } else {

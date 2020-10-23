@@ -3,27 +3,27 @@ import UIKit
 import EpubViewerKit
 
 public class SwiftEpubViewerPlugin: NSObject, FlutterPlugin,FolioReaderPageDelegate,FlutterStreamHandler {
-    
+
     let folioReader = FolioReader()
     static var pageResult: FlutterResult? = nil
     static var pageChannel:FlutterEventChannel? = nil
-    
+
     var config: EpubConfig?
-    
-    
+
+
     //12.13
     public static func register(with registrar: FlutterPluginRegistrar) {
       let channel = FlutterMethodChannel(name: "epub_viewer", binaryMessenger: registrar.messenger())
       let instance = SwiftEpubViewerPlugin()
-        
+
       pageChannel = FlutterEventChannel.init(name: "page",
                                   binaryMessenger: registrar.messenger());
-      
+
       registrar.addMethodCallDelegate(instance, channel: channel)
     }
 
     public func handle(_ call: FlutterMethodCall, result: @escaping FlutterResult) {
-      
+
 
       switch call.method {
       case "setConfig":
@@ -54,12 +54,12 @@ public class SwiftEpubViewerPlugin: NSObject, FlutterPlugin,FolioReaderPageDeleg
       }
   //    result("iOS " + UIDevice.current.systemVersion)
     }
-      
+
       private func setPageHandler(){
           SwiftEpubViewerPlugin.pageChannel?.setStreamHandler(self)
 
       }
-      
+
       public func onListen(withArguments arguments: Any?, eventSink events: @escaping FlutterEventSink) -> FlutterError? {
           SwiftEpubViewerPlugin.pageResult = events
           return nil
@@ -68,8 +68,8 @@ public class SwiftEpubViewerPlugin: NSObject, FlutterPlugin,FolioReaderPageDeleg
       public func onCancel(withArguments arguments: Any?) -> FlutterError? {
           return nil
       }
-      
-      
+
+
       fileprivate func open(epubPath: String) {
            if epubPath == "" {
               return
@@ -81,7 +81,7 @@ public class SwiftEpubViewerPlugin: NSObject, FlutterPlugin,FolioReaderPageDeleg
       }
 
       public func pageWillLoad(_ page: FolioReaderPage) {
-          
+
           print("page.pageNumber:"+String(page.pageNumber))
 
           if (SwiftEpubViewerPlugin.pageResult != nil){
@@ -89,7 +89,7 @@ public class SwiftEpubViewerPlugin: NSObject, FlutterPlugin,FolioReaderPageDeleg
           }
 
       }
-      
+
       private func close(){
           folioReader.readerContainer?.dismiss(animated: true, completion: nil)
       }
