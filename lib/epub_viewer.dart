@@ -25,6 +25,7 @@ class EpubViewer {
   static void setConfig(
       {Color themeColor = Colors.blue,
       String identifier = 'book',
+      bool nightMode = false,
       EpubScrollDirection scrollDirection = EpubScrollDirection.ALLDIRECTIONS,
       bool allowSharing = false,
       bool enableTts = false}) async {
@@ -34,6 +35,7 @@ class EpubViewer {
       "scrollDirection": Util.getDirection(scrollDirection),
       "allowSharing": allowSharing,
       'enableTts': enableTts,
+      'nightMode': nightMode
     };
     await _channel.invokeMethod('setConfig', agrs);
   }

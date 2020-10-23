@@ -55,12 +55,12 @@ class _MyAppState extends State<MyApp> {
                     print(iosBookPath);
                     String androidBookPath = 'file:///android_asset/3.epub';
                     EpubViewer.setConfig(
-                      themeColor: Theme.of(context).primaryColor,
-                      identifier: "iosBook",
-                      scrollDirection: EpubScrollDirection.ALLDIRECTIONS,
-                      allowSharing: true,
-                      enableTts: true,
-                    );
+                        themeColor: Theme.of(context).primaryColor,
+                        identifier: "iosBook",
+                        scrollDirection: EpubScrollDirection.ALLDIRECTIONS,
+                        allowSharing: true,
+                        enableTts: true,
+                        nightMode: true);
 //                    EpubViewer.open(
 //                      Platform.isAndroid ? androidBookPath : iosBookPath,
 //                      lastLocation: EpubLocator.fromJson({
@@ -74,7 +74,7 @@ class _MyAppState extends State<MyApp> {
 //                    );
 
                     await EpubViewer.openAsset(
-                      'assets/3.epub',
+                      'assets/4.epub',
                       lastLocation: EpubLocator.fromJson({
                         "bookId": "2239",
                         "href": "/OEBPS/ch06.xhtml",
@@ -86,7 +86,8 @@ class _MyAppState extends State<MyApp> {
                     );
                     // get current locator
                     EpubViewer.locatorStream.listen((locator) {
-                      print('LOCATOR: ${EpubLocator.fromJson(jsonDecode(locator))}');
+                      print(
+                          'LOCATOR: ${EpubLocator.fromJson(jsonDecode(locator))}');
                     });
                   },
                   child: Container(

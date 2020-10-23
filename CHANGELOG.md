@@ -1,3 +1,7 @@
+## 0.1.8
+
+* Bug fixes
+
 ## 0.0.8
 
 * Display ios header.

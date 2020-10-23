@@ -6,7 +6,7 @@
 //
 
 import UIKit
-import epub_kitty_ios
+import EpubViewerKit
 
 class EpubConfig: NSObject {
     
@@ -17,7 +17,7 @@ class EpubConfig: NSObject {
     open var scrollDirection: FolioReaderScrollDirection = FolioReaderScrollDirection.vertical
     
     init(Identifier: String,tintColor: String, allowSharing: Bool,
-            scrollDirection: String, enableTts: Bool) {
+            scrollDirection: String, enableTts: Bool, nightMode: Bool) {
         self.config = FolioReaderConfig(withIdentifier: Identifier)
         self.tintColor = UIColor.init(rgba: tintColor)
         self.allowSharing = allowSharing
