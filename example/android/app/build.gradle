@@ -45,6 +45,11 @@ android {
         versionName flutterVersionName
     }
 
+    packagingOptions {
+        exclude 'META-INF/*'
+        exclude 'META-INF/nanohttpd/default-mimetypes.properties'
+    }
+
     buildTypes {
         release {
             // TODO: Add your own signing config for the release build.
