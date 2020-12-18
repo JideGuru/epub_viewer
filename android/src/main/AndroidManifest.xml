@@ -1,14 +1,3 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    package="com.jideguru.epub_viewer">
-
-    <application
-        android:allowBackup="true"
-        tools:replace="android:allowBackup"
-        tools:targetApi="m"
-        android:usesCleartextTraffic="true">
-        <activity
-            android:name=".epub.EpubActivity"
-            android:label="@string/title_activity_epub" />
-    </application>
+  package="com.jideguru.epub_viewer">
 </manifest>
