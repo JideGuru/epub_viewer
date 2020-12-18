@@ -27,18 +27,41 @@ rootProject.allprojects {
 
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'com.github.dcendents.android-maven'
 
 android {
-    compileSdkVersion 29
+    compileSdkVersion 30
 
-    sourceSets {
-        main.java.srcDirs += 'src/main/kotlin'
-    }
     defaultConfig {
-        minSdkVersion 16
+        minSdkVersion 21
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     lintOptions {
         disable 'InvalidPackage'
+    }
+
+    packagingOptions {
+        exclude 'META-INF/*'
+        exclude 'META-INF/nanohttpd/default-mimetypes.properties'
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    sourceSets {
+        main {
+            java.srcDirs = ['src/main/java']
+            res.srcDirs = ['src/main/res']
+            assets.srcDirs = ['src/main/assets']
+            if (findProject(':r2-lcp')) {
+                java.srcDirs = ['src/main/java', 'src/withlcp/java']
+            } else {
+                java.srcDirs = ['src/main/java', 'src/nondrm/java']
+            }
+        }
     }
 }
 
