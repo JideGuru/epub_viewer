@@ -1,13 +1,13 @@
 package com.jideguru.epub_viewer
 
 import androidx.annotation.NonNull
-
 import io.flutter.embedding.engine.plugins.FlutterPlugin
 import io.flutter.plugin.common.MethodCall
 import io.flutter.plugin.common.MethodChannel
 import io.flutter.plugin.common.MethodChannel.MethodCallHandler
 import io.flutter.plugin.common.MethodChannel.Result
 import io.flutter.plugin.common.PluginRegistry.Registrar
+import timber.log.Timber
 
 /** EpubViewerPlugin */
 class EpubViewerPlugin: FlutterPlugin, MethodCallHandler {
@@ -24,11 +24,12 @@ class EpubViewerPlugin: FlutterPlugin, MethodCallHandler {
 
   override fun onMethodCall(@NonNull call: MethodCall, @NonNull result: Result) {
     if (call.method.equals("setConfig")) {
+      Timber.tag("epub_viewer").i("SetConfig")
     } else if (call.method.equals("open")) {
       val arguments = call.arguments as Map<String, Any>
       val bookPath = arguments["bookPath"].toString()
       val lastLocation = arguments["lastLocation"].toString()
-      Log.i("KYREAD", "SetConfig")
+      Timber.tag("epub_viewer").i("Open")
     } else if (call.method.equals("close")) {
 //            reader.close()
     } else {
