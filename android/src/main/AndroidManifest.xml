@@ -5,7 +5,6 @@
     <application
         android:allowBackup="true"
         android:usesCleartextTraffic="true"
-        tools:replace="android:allowBackup"
         tools:targetApi="m">
         <activity
             android:name=".epub.EpubActivity"
