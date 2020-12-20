@@ -1,5 +1,7 @@
 package com.jideguru.epub_viewer
 
+import android.os.CountDownTimer
+import android.util.Log
 import android.content.Context
 import android.content.SharedPreferences
 import android.os.Bundle
@@ -15,8 +17,8 @@ import com.jideguru.epub_viewer.permissions.PermissionHelper
 import com.jideguru.epub_viewer.permissions.Permissions
 import com.jideguru.epub_viewer.utils.NavigatorContract
 import com.jideguru.epub_viewer.utils.extensions.download
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
+import kotlin.coroutines.*
 import org.jetbrains.anko.design.longSnackbar
 import org.json.JSONObject
 import org.jsoup.parser.Parser
@@ -38,6 +40,9 @@ import java.net.ServerSocket
 import java.net.URL
 import java.util.*
 import com.jideguru.epub_viewer.BuildConfig.DEBUG
+import org.readium.r2.shared.extensions.putPublication
+import com.jideguru.epub_viewer.epub.EpubActivity
+import android.content.Intent
 
 class Reader : AppCompatActivity() {
     private lateinit var server: Server
@@ -49,9 +54,11 @@ class Reader : AppCompatActivity() {
     protected var contentProtections: List<ContentProtection> = emptyList()
     private lateinit var streamer: Streamer
     private lateinit var R2DIRECTORY: String
+    private val mainScope = CoroutineScope(Dispatchers.Main)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        val ebookPath = intent.getStringExtra("bookPath")
 
         preferences = getSharedPreferences("org.readium.r2.settings", Context.MODE_PRIVATE)
 
@@ -87,6 +94,16 @@ class Reader : AppCompatActivity() {
             if (pubData.deleteOnResult)
                 tryOrNull { pubData.file.file.delete() }
         }
+
+        val timer = object: CountDownTimer(20000, 1000) {
+            override fun onTick(millisUntilFinished: Long) {}
+
+            override fun onFinish() {
+                // use Main Dispatchers to launch the openbook function
+                mainScope.launch {openBook(ebookPath!!, "{}")}
+            }
+        }
+        timer.start()
     }
 
     override fun onStart() {
@@ -157,34 +174,53 @@ class Reader : AppCompatActivity() {
         val format = Format.of(fileExtension = book.extension.removePrefix("."))
         val file = remoteUrl // remote file
                 ?: org.readium.r2.shared.util.File(book.path, format = format) // local file
-
+        Log.i("OPENING", "FETCHED")
         streamer.open(file, allowUserInteraction = true, sender = this@Reader)
                 .onFailure {
+                    Log.i("OPENING", "FAILED")
                     Timber.d(it)
 //                        progress.dismiss()
 //                        presentOpeningException(it)
                 }
                 .onSuccess { it ->
                     if (it.isRestricted) {
+                        Log.i("OPENING", "SUCCESS RESTRICTED")
 //                            progress.dismiss()
                         it.protectionError.let { error ->
                             Timber.d(error)
 //                                catalogView.longSnackbar(error?.getUserMessage(this@LibraryActivity))
                         }
                     } else {
+                        Log.i("OPENING", "SUCCESS")
                         prepareToServe(it, file)
+                        Log.i("OPENING", "PREPARED")
 //                            progress.dismiss()
-                        navigatorLauncher.launch(
-                                NavigatorContract.Input(
-                                        file = file,
-                                        format = format,
-                                        publication = it,
-                                        bookId = book.lastModified(),
-                                        initialLocator = locator,
-                                        deleteOnResult = remoteUrl != null,
-                                        baseUrl = Publication.localBaseUrlOf(file.name, localPort)
-                                )
-                        )
+                        try {
+                            navigatorLauncher.launch(
+                                    NavigatorContract.Input(
+                                            file = file,
+                                            format = format,
+                                            publication = it,
+                                            bookId = book.lastModified(),
+                                            initialLocator = locator,
+                                            deleteOnResult = remoteUrl != null,
+                                            baseUrl = Publication.localBaseUrlOf(file.name, localPort)
+                                    )
+                            )
+//                            val intent = Intent(this@Reader, EpubActivity::class.java).apply {
+//                                putPublication(it)
+//                                putExtra("bookId", book.lastModified())
+//                                putExtra("publicationPath", file.path)
+//                                putExtra("publicationFileName", file.name)
+//                                putExtra("deleteOnResult", remoteUrl != null)
+//                                putExtra("baseUrl", Publication.localBaseUrlOf(file.name, localPort))
+//                                putExtra("locator", locator)
+//                            }
+//                            startActivity(intent)
+                        } catch (e: Exception) {
+                            Log.i("OPENING", e.message!!)
+                        }
+                        Log.i("OPENING", "OPENED")
                     }
                 }
     }

@@ -7,7 +7,31 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="m">
         <activity
+            android:name=".Reader"
+            android:theme="@style/Theme.AppCompat.Light"
+            android:label="Loading..." />
+        <activity
+            android:name=".opds.OPDSDetailActivity"
+            android:theme="@style/Theme.AppCompat.Light"
+            android:label="@string/title_activity_opds_detail" />
+        <activity
+            android:name=".audiobook.AudiobookActivity"
+            android:theme="@style/Theme.AppCompat.Light"
+            android:label="@string/title_activity_epub" />
+        <activity
             android:name=".epub.EpubActivity"
+            android:theme="@style/Theme.AppCompat.Light"
+            android:label="@string/title_activity_epub" />
+        <activity
+            android:name=".pdf.PdfActivity"
+            android:theme="@style/Theme.AppCompat.Light"/>
+        <activity
+            android:name=".comic.DiViNaActivity"
+            android:theme="@style/Theme.AppCompat.Light"
+            android:label="@string/title_activity_epub" />
+        <activity
+            android:name=".comic.ComicActivity"
+            android:theme="@style/Theme.AppCompat.Light"
             android:label="@string/title_activity_epub" />
     </application>
 </manifest>
