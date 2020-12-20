@@ -43,18 +43,22 @@ class EpubViewer {
   /// bookPath should be a local file.
   /// Last location is only available for android.
   static void open(String bookPath, {EpubLocator lastLocation}) async {
-    Map<String, dynamic> agrs = {
-      "bookPath": bookPath,
-      'lastLocation':
-          lastLocation == null ? '' : jsonEncode(lastLocation.toJson()),
-    };
-    await _channel.invokeMethod('open', agrs);
+    if (Util.supportedPlatform.contains(extension(bookPath))) {
+      Map<String, dynamic> agrs = {
+        "bookPath": bookPath,
+        'lastLocation':
+        lastLocation == null ? '' : jsonEncode(lastLocation.toJson()),
+      };
+      await _channel.invokeMethod('open', agrs);
+    } else {
+      throw ('${extension(bookPath)} cannot be opened, use an EPUB File');
+    }
   }
 
   /// bookPath should be an asset file path.
   /// Last location is only available for android.
   static Future openAsset(String bookPath, {EpubLocator lastLocation}) async {
-    if (extension(bookPath) == '.epub') {
+    if (Util.supportedPlatform.contains(extension(bookPath))) {
       Map<String, dynamic> agrs = {
         "bookPath": (await Util.getFileFromAsset(bookPath)).path,
         'lastLocation':

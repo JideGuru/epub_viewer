@@ -31,4 +31,7 @@ class Util {
     return File(path).writeAsBytes(
         buffer.asUint8List(data.offsetInBytes, data.lengthInBytes));
   }
+
+  static List supportedPlatform =
+      Platform.isIOS ? ['.epub'] : ['.epub', '.pdf', '.audiobook', '.cbz'];
 }

@@ -69,7 +69,7 @@ import com.jideguru.epub_viewer.search.MarkJSSearchEngine
 import com.jideguru.epub_viewer.search.SearchLocatorAdapter
 import timber.log.Timber
 import kotlin.coroutines.CoroutineContext
-
+import android.util.Log
 
 /**
  * EpubActivity : Extension of the EpubActivity() from navigator
@@ -125,6 +125,7 @@ class EpubActivity : R2EpubActivity(), CoroutineScope, NavigatorDelegate/*, Visu
      *   - Initialize search.
      */
     override fun onCreate(savedInstanceState: Bundle?) {
+        Log.i("EPUBSCREEN", "CREATED")
         if (activitiesLaunched.incrementAndGet() > 1 || !LibraryActivity.isServerStarted) {
             finish()
         }

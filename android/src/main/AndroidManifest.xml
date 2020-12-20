@@ -24,7 +24,7 @@
             android:label="@string/title_activity_epub" />
         <activity
             android:name=".pdf.PdfActivity"
-            android:theme="@style/Theme.AppCompat.Light"/>
+            android:theme="@style/Theme.AppCompat.Light" />
         <activity
             android:name=".comic.DiViNaActivity"
             android:theme="@style/Theme.AppCompat.Light"

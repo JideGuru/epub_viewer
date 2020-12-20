@@ -43,24 +43,50 @@ class _MyAppState extends State<MyApp> {
           title: const Text('Plugin example app'),
         ),
         body: Center(
-          child: loading
-              ? CircularProgressIndicator()
-              : FlatButton(
-                  onPressed: () async {
-                    Directory appDocDir =
-                        await getApplicationDocumentsDirectory();
-                    print('$appDocDir');
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              FlatButton(
+                onPressed: () => open(),
+                child: Container(
+                  child: Text('open epub'),
+                ),
+              ),
 
-                    String iosBookPath = '${appDocDir.path}/chair.epub';
-                    print(iosBookPath);
-                    String androidBookPath = 'file:///android_asset/3.epub';
-                    EpubViewer.setConfig(
-                        themeColor: Theme.of(context).primaryColor,
-                        identifier: "iosBook",
-                        scrollDirection: EpubScrollDirection.ALLDIRECTIONS,
-                        allowSharing: true,
-                        enableTts: true,
-                        nightMode: true);
+              FlatButton(
+                onPressed: () => open(pdf: true),
+                child: Container(
+                  child: Text('open pdf'),
+                ),
+              ),
+
+              FlatButton(
+                onPressed: () => open(cbz: true),
+                child: Container(
+                  child: Text('open cbz'),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  open({bool pdf = false, bool cbz = false}) async {
+    Directory appDocDir = await getApplicationDocumentsDirectory();
+    print('$appDocDir');
+
+    String iosBookPath = '${appDocDir.path}/chair.epub';
+    print(iosBookPath);
+    String androidBookPath = 'file:///android_asset/3.epub';
+    EpubViewer.setConfig(
+        themeColor: Theme.of(context).primaryColor,
+        identifier: "iosBook",
+        scrollDirection: EpubScrollDirection.ALLDIRECTIONS,
+        allowSharing: true,
+        enableTts: true,
+        nightMode: true);
 //                    EpubViewer.open(
 //                      Platform.isAndroid ? androidBookPath : iosBookPath,
 //                      lastLocation: EpubLocator.fromJson({
@@ -73,30 +99,19 @@ class _MyAppState extends State<MyApp> {
 //                      }),
 //                    );
 
-                    await EpubViewer.openAsset(
-                      'assets/4.epub',
-                      lastLocation: EpubLocator.fromJson({
-                        "bookId": "2239",
-                        "href": "/OEBPS/ch06.xhtml",
-                        "created": 1539934158390,
-                        "locations": {
-                          "cfi": "epubcfi(/0!/4/4[simple_book]/2/2/6)"
-                        }
-                      }),
-                    );
-                    // get current locator
-                    EpubViewer.locatorStream.listen((locator) {
-                      print(
-                          'LOCATOR: ${EpubLocator.fromJson(jsonDecode(locator))}');
-                    });
-                  },
-                  child: Container(
-                    child: Text('open epub'),
-                  ),
-                ),
-        ),
-      ),
+    await EpubViewer.openAsset(
+      pdf ? 'assets/1.pdf' : cbz?'assets/2.cbz':'assets/4.epub',
+      lastLocation: EpubLocator.fromJson({
+        "bookId": "2239",
+        "href": "/OEBPS/ch06.xhtml",
+        "created": 1539934158390,
+        "locations": {"cfi": "epubcfi(/0!/4/4[simple_book]/2/2/6)"}
+      }),
     );
+    // get current locator
+    EpubViewer.locatorStream.listen((locator) {
+      print('LOCATOR: ${EpubLocator.fromJson(jsonDecode(locator))}');
+    });
   }
 
   Future downloadFile() async {
