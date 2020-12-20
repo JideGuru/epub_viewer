@@ -47,8 +47,8 @@ import android.content.Intent
 class Reader : AppCompatActivity() {
     private lateinit var server: Server
     private var localPort: Int = 0
-    private lateinit var permissionHelper: PermissionHelper
-    private lateinit var permissions: Permissions
+//    private lateinit var permissionHelper: PermissionHelper
+//    private lateinit var permissions: Permissions
     private lateinit var preferences: SharedPreferences
     private lateinit var navigatorLauncher: ActivityResultLauncher<NavigatorContract.Input>
     protected var contentProtections: List<ContentProtection> = emptyList()
@@ -64,7 +64,7 @@ class Reader : AppCompatActivity() {
 
         streamer = Streamer(this, contentProtections = contentProtections)
 
-        val s = ServerSocket(if (DEBUG) 8080 else 0)
+        val s = ServerSocket(if (DEBUG) 8088 else 0)
         s.localPort
         s.close()
 
@@ -82,9 +82,6 @@ class Reader : AppCompatActivity() {
             this.filesDir.path + "/"
         }
 
-        permissions = Permissions(this)
-        permissionHelper = PermissionHelper(this, permissions)
-
         navigatorLauncher = registerForActivityResult(NavigatorContract()) { pubData: NavigatorContract.Output? ->
             if (pubData == null)
                 return@registerForActivityResult
@@ -95,33 +92,23 @@ class Reader : AppCompatActivity() {
                 tryOrNull { pubData.file.file.delete() }
         }
 
-        val timer = object: CountDownTimer(20000, 1000) {
-            override fun onTick(millisUntilFinished: Long) {}
-
-            override fun onFinish() {
-                // use Main Dispatchers to launch the openbook function
-                mainScope.launch {openBook(ebookPath!!, "{}")}
-            }
-        }
-        timer.start()
+//        val timer = object: CountDownTimer(20000, 1000) {
+//            override fun onTick(millisUntilFinished: Long) {}
+//
+//            override fun onFinish() {
+//                Log.i("TIMER", "LAUNCHED")
+//                // use Main Dispatchers to launch the openbook function
+//                mainScope.launch {openBook(ebookPath!!, "{}")}
+//            }
+//        }
+//        timer.start()
+        mainScope.launch {openBook(ebookPath!!, "{}")}
     }
 
     override fun onStart() {
         super.onStart()
 
         startServer()
-
-        permissionHelper.storagePermission {
-            if (books.isEmpty()) {
-                if (!preferences.contains("samples")) {
-                    val dir = File(R2DIRECTORY)
-                    if (!dir.exists()) {
-                        dir.mkdirs()
-                    }
-                    preferences.edit().putBoolean("samples", true).apply()
-                }
-            }
-        }
     }
 
     override fun onDestroy() {
@@ -195,31 +182,17 @@ class Reader : AppCompatActivity() {
                         prepareToServe(it, file)
                         Log.i("OPENING", "PREPARED")
 //                            progress.dismiss()
-                        try {
-                            navigatorLauncher.launch(
-                                    NavigatorContract.Input(
-                                            file = file,
-                                            format = format,
-                                            publication = it,
-                                            bookId = book.lastModified(),
-                                            initialLocator = locator,
-                                            deleteOnResult = remoteUrl != null,
-                                            baseUrl = Publication.localBaseUrlOf(file.name, localPort)
-                                    )
-                            )
-//                            val intent = Intent(this@Reader, EpubActivity::class.java).apply {
-//                                putPublication(it)
-//                                putExtra("bookId", book.lastModified())
-//                                putExtra("publicationPath", file.path)
-//                                putExtra("publicationFileName", file.name)
-//                                putExtra("deleteOnResult", remoteUrl != null)
-//                                putExtra("baseUrl", Publication.localBaseUrlOf(file.name, localPort))
-//                                putExtra("locator", locator)
-//                            }
-//                            startActivity(intent)
-                        } catch (e: Exception) {
-                            Log.i("OPENING", e.message!!)
-                        }
+                        navigatorLauncher.launch(
+                                NavigatorContract.Input(
+                                        file = file,
+                                        format = format,
+                                        publication = it,
+                                        bookId = book.lastModified(),
+                                        initialLocator = locator,
+                                        deleteOnResult = remoteUrl != null,
+                                        baseUrl = Publication.localBaseUrlOf(file.name, localPort)
+                                )
+                        )
                         Log.i("OPENING", "OPENED")
                     }
                 }
