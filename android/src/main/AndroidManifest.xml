@@ -7,31 +7,48 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="m">
         <activity
+            android:name=".utils.R2DispatcherActivity"
+            android:launchMode="singleInstance"
+            android:noHistory="true"
+            android:theme="@android:style/Theme.NoDisplay"/>
+        <activity
             android:name=".Reader"
-            android:theme="@style/Theme.AppCompat.Light"
+            android:theme="@style/AppTheme"
             android:label="Loading..." />
         <activity
             android:name=".opds.OPDSDetailActivity"
-            android:theme="@style/Theme.AppCompat.Light"
+            android:theme="@style/AppTheme"
             android:label="@string/title_activity_opds_detail" />
         <activity
             android:name=".audiobook.AudiobookActivity"
-            android:theme="@style/Theme.AppCompat.Light"
+            android:theme="@style/AppTheme"
             android:label="@string/title_activity_epub" />
         <activity
             android:name=".epub.EpubActivity"
-            android:theme="@style/Theme.AppCompat.Light"
+            android:theme="@style/AppTheme"
             android:label="@string/title_activity_epub" />
         <activity
             android:name=".pdf.PdfActivity"
-            android:theme="@style/Theme.AppCompat.Light" />
+            android:theme="@style/AppTheme" />
         <activity
             android:name=".comic.DiViNaActivity"
-            android:theme="@style/Theme.AppCompat.Light"
+            android:theme="@style/AppTheme"
             android:label="@string/title_activity_epub" />
         <activity
             android:name=".comic.ComicActivity"
-            android:theme="@style/Theme.AppCompat.Light"
+            android:theme="@style/AppTheme"
             android:label="@string/title_activity_epub" />
+        <activity
+            android:name=".DRMManagementActivity"
+            android:label="DRM Management"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".audiobook.AudiobookActivity"
+            android:label="@string/title_activity_epub"
+            android:theme="@style/AppTheme"/>
+        <activity
+            android:name=".outline.R2OutlineActivity"
+            android:label="@string/title_activity_outline"
+            android:theme="@style/AppTheme"/>
     </application>
 </manifest>

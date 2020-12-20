@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Module: r2-testapp-kotlin
+  ~ Developers: Aferdita Muriqi, Clément Baumann
+  ~
+  ~ Copyright (c) 2018. European Digital Reading Lab. All rights reserved.
+  ~ Licensed to the Readium Foundation under one or more contributor license agreements.
+  ~ Use of this source code is governed by a BSD-style license which is detailed in the
+  ~ LICENSE file present in the project repository where this source code is maintained.
+  -->
+
+<resources>
+    <color name="colorPrimary">#2196f3</color>
+    <color name="colorPrimaryDark">#1976d2</color>
+    <color name="colorAccent">#009688</color>
+    <color name="colorAccentPrefs">#2196f3</color>
+    <color name="white">#fff</color>
+
+
+    <color name="snackbar_background_color">@color/colorPrimaryDark</color>
+    <color name="snackbar_text_color">@color/white</color>
+
+</resources>

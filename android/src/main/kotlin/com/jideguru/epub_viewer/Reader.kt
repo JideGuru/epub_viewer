@@ -1,5 +1,6 @@
 package com.jideguru.epub_viewer
 
+import com.jideguru.epub_viewer.utils.extensions.blockingProgressDialog
 import android.os.CountDownTimer
 import android.util.Log
 import android.content.Context
@@ -47,7 +48,8 @@ import android.content.Intent
 class Reader : AppCompatActivity() {
     private lateinit var server: Server
     private var localPort: Int = 0
-//    private lateinit var permissionHelper: PermissionHelper
+
+    //    private lateinit var permissionHelper: PermissionHelper
 //    private lateinit var permissions: Permissions
     private lateinit var preferences: SharedPreferences
     private lateinit var navigatorLauncher: ActivityResultLauncher<NavigatorContract.Input>
@@ -91,7 +93,7 @@ class Reader : AppCompatActivity() {
             if (pubData.deleteOnResult)
                 tryOrNull { pubData.file.file.delete() }
         }
-
+        startServer(ebookPath!!)
 //        val timer = object: CountDownTimer(20000, 1000) {
 //            override fun onTick(millisUntilFinished: Long) {}
 //
@@ -102,13 +104,7 @@ class Reader : AppCompatActivity() {
 //            }
 //        }
 //        timer.start()
-        mainScope.launch {openBook(ebookPath!!, "{}")}
-    }
-
-    override fun onStart() {
-        super.onStart()
-
-        startServer()
+//        mainScope.launch { openBook(ebookPath!!, "{}") }
     }
 
     override fun onDestroy() {
@@ -117,8 +113,9 @@ class Reader : AppCompatActivity() {
         stopServer()
     }
 
-    private fun startServer() {
+    private fun startServer(bookPath: String) {
         if (!server.isAlive) {
+            Log.i("EPUBSCREEN", "STARTSERVER")
             try {
                 server.start()
             } catch (e: IOException) {
@@ -126,6 +123,7 @@ class Reader : AppCompatActivity() {
                 if (DEBUG) Timber.e(e)
             }
             if (server.isAlive) {
+                Log.i("EPUBSCREEN", "LOADFILES")
 //                // Add your own resources here
 //                server.loadCustomResource(assets.open("scripts/test.js"), "test.js")
 //                server.loadCustomResource(assets.open("styles/test.css"), "test.css")
@@ -135,7 +133,8 @@ class Reader : AppCompatActivity() {
                 server.loadCustomResource(assets.open("Search/search.js"), "search.js", Injectable.Script)
                 server.loadCustomResource(assets.open("Search/mark.css"), "mark.css", Injectable.Style)
 
-               isServerStarted = true
+                isServerStarted = true
+                mainScope.launch { openBook(bookPath, "{}") }
             }
         }
     }
@@ -146,6 +145,7 @@ class Reader : AppCompatActivity() {
             isServerStarted = false
         }
     }
+
     private suspend fun URL.copyToTempFile(): org.readium.r2.shared.util.File? = tryOrNull {
         val filename = UUID.randomUUID().toString()
         val file = File("$R2DIRECTORY$filename.$extension")
@@ -155,6 +155,8 @@ class Reader : AppCompatActivity() {
     }
 
     public suspend fun openBook(bookPath: String, lastLocation: String) {
+        val progress = blockingProgressDialog(getString(R.string.progress_wait_while_preparing_book))
+        progress.show()
         val locator = Locator.fromJSON(JSONObject(lastLocation))
         val book = File(bookPath)
         val remoteUrl = tryOrNull { URL(book.path).copyToTempFile() }
@@ -166,13 +168,15 @@ class Reader : AppCompatActivity() {
                 .onFailure {
                     Log.i("OPENING", "FAILED")
                     Timber.d(it)
-//                        progress.dismiss()
+                    progress.dismiss()
+                    this.finish()
 //                        presentOpeningException(it)
                 }
                 .onSuccess { it ->
                     if (it.isRestricted) {
                         Log.i("OPENING", "SUCCESS RESTRICTED")
-//                            progress.dismiss()
+                        progress.dismiss()
+                        this.finish()
                         it.protectionError.let { error ->
                             Timber.d(error)
 //                                catalogView.longSnackbar(error?.getUserMessage(this@LibraryActivity))
@@ -181,7 +185,9 @@ class Reader : AppCompatActivity() {
                         Log.i("OPENING", "SUCCESS")
                         prepareToServe(it, file)
                         Log.i("OPENING", "PREPARED")
-//                            progress.dismiss()
+                        progress.dismiss()
+                        // close this activity before opening the next one
+//                        this.finish()
                         navigatorLauncher.launch(
                                 NavigatorContract.Input(
                                         file = file,
