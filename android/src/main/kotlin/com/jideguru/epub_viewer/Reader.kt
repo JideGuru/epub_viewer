@@ -186,8 +186,8 @@ class Reader : AppCompatActivity() {
                         prepareToServe(it, file)
                         Log.i("OPENING", "PREPARED")
                         progress.dismiss()
-                        // close this activity before opening the next one
 //                        this.finish()
+                        // close this activity before opening the next one
                         navigatorLauncher.launch(
                                 NavigatorContract.Input(
                                         file = file,

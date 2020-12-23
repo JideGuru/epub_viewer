@@ -51,7 +51,7 @@ class EpubViewer {
       };
       await _channel.invokeMethod('open', agrs);
     } else {
-      throw ('${extension(bookPath)} cannot be opened, use an EPUB File');
+      throw ('The ${extension(bookPath)} is not supported');
     }
   }
 
@@ -66,7 +66,7 @@ class EpubViewer {
       };
       await _channel.invokeMethod('open', agrs);
     } else {
-      throw ('${extension(bookPath)} cannot be opened, use an EPUB File');
+      throw ('The ${extension(bookPath)} is not supported');
     }
   }
 

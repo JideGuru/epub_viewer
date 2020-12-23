@@ -12,8 +12,8 @@
 <resources>
     <color name="colorPrimary">#2196f3</color>
     <color name="colorPrimaryDark">#1976d2</color>
-    <color name="colorAccent">#009688</color>
-    <color name="colorAccentPrefs">#2196f3</color>
+    <color name="colorAccent">#fff</color>
+    <color name="colorAccentPrefs">#000</color>
     <color name="white">#fff</color>
 
 
