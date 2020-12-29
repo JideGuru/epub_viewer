@@ -33,7 +33,7 @@ public class Reader implements OnHighlightListener, ReadLocatorListener, FolioRe
     public MethodChannel.Result result;
     private EventChannel.EventSink pageEventSink;
     private BinaryMessenger messenger;
-
+    private ReadLocator  read_locator;
     private static final String PAGE_CHANNEL = "page";
 
     Reader(Context context, BinaryMessenger messenger,ReaderConfig config){
@@ -153,7 +153,11 @@ public class Reader implements OnHighlightListener, ReadLocatorListener, FolioRe
 
     @Override
     public void onFolioReaderClosed() {
+        Log.i("readLocator", "-> saveReadLocator -> " + read_locator.toJson());
 
+        if (pageEventSink != null){
+            pageEventSink.success(read_locator.toJson());
+        }
     }
 
     @Override
@@ -163,11 +167,7 @@ public class Reader implements OnHighlightListener, ReadLocatorListener, FolioRe
 
     @Override
     public void saveReadLocator(ReadLocator readLocator) {
-        Log.i("readLocator", "-> saveReadLocator -> " + readLocator.toJson());
-
-        if (pageEventSink != null){
-            pageEventSink.success(readLocator.toJson());
-        }
+        read_locator = readLocator;
     }
 
 
