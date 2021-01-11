@@ -50,7 +50,7 @@ dependencies:
 
 Note: Please add this to the release build type in your app build.gradle to avoid crashes on android release builds
 ```
-minifyEnable false
+minifyEnabled false
 shrinkResources false
 ```
 
