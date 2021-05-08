@@ -2,10 +2,10 @@ part of 'package:epub_viewer/epub_viewer.dart';
 
 /// Model for android EpubLocator
 class EpubLocator {
-  String bookId;
-  String href;
-  int created;
-  Locations locations;
+  String? bookId;
+  String? href;
+  int? created;
+  Locations? locations;
 
   EpubLocator({this.bookId, this.href, this.created, this.locations});
 
@@ -24,7 +24,7 @@ class EpubLocator {
     data['href'] = this.href;
     data['created'] = this.created;
     if (this.locations != null) {
-      data['locations'] = this.locations.toJson();
+      data['locations'] = this.locations!.toJson();
     }
     return data;
   }
@@ -32,7 +32,7 @@ class EpubLocator {
 
 /// Model for Locations in [EpubLocator]
 class Locations {
-  String cfi;
+  String? cfi;
 
   Locations({this.cfi});
 
