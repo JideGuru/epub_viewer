@@ -101,11 +101,9 @@ class _MyAppState extends State<MyApp> {
 
   Future downloadFile() async {
     print('download1');
-    PermissionStatus permission = await PermissionHandler()
-        .checkPermissionStatus(PermissionGroup.storage);
 
-    if (permission != PermissionStatus.granted) {
-      await PermissionHandler().requestPermissions([PermissionGroup.storage]);
+    if (await Permission.storage.isGranted) {
+      await Permission.storage.request();
       await startDownload();
     } else {
       await startDownload();
@@ -113,11 +111,11 @@ class _MyAppState extends State<MyApp> {
   }
 
   startDownload() async {
-    Directory appDocDir = Platform.isAndroid
+    Directory? appDocDir = Platform.isAndroid
         ? await getExternalStorageDirectory()
         : await getApplicationDocumentsDirectory();
 
-    String path = appDocDir.path + '/chair.epub';
+    String path = appDocDir!.path + '/chair.epub';
     File file = File(path);
 //    await file.delete();
 

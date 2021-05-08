@@ -3,21 +3,21 @@ description: Demonstrates how to use the epub_kitty plugin.
 publish_to: 'none'
 
 environment:
-  sdk: ">=2.1.0 <3.0.0"
+  sdk: ">=2.12.0 <3.0.0"
 
 dependencies:
   flutter:
     sdk: flutter
   cupertino_icons: ^0.1.2
-  permission_handler: ^4.2.0+hotfix.1
-  dio: ^3.0.9
+  permission_handler: ^7.1.0
+  dio: ^4.0.0
   path_provider: ^2.0.1
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  build_runner: ^1.10.0
-  hive_generator: ^0.5.0
+#  build_runner: ^1.10.0
+#  hive_generator: ^0.5.0
 
   epub_viewer:
     path: ../
