@@ -1,3 +1,7 @@
+## 0.2.2
+
+* Realm bug fix
+
 ## 0.1.8
 
 * Bug fixes
