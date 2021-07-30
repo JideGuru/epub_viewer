@@ -70,8 +70,9 @@ class EpubViewer {
   static Stream get locatorStream {
     Stream pageStream = _pageChannel
         .receiveBroadcastStream()
-        .map((value) => Platform.isAndroid ? value : '{}');
+        .map((value) => Platform.isAndroid ? value : '{"page" : "$value"}');
 
     return pageStream;
   }
+
 }
