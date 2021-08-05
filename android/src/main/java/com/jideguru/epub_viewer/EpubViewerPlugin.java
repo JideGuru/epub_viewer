@@ -2,10 +2,12 @@ package com.jideguru.epub_viewer;
 
 import android.app.Activity;
 import android.content.Context;
+import android.util.Log;
 
 import java.util.Map;
 
 import io.flutter.plugin.common.BinaryMessenger;
+import io.flutter.plugin.common.EventChannel;
 import io.flutter.plugin.common.MethodCall;
 import io.flutter.plugin.common.MethodChannel;
 import io.flutter.plugin.common.MethodChannel.MethodCallHandler;
@@ -21,6 +23,8 @@ public class EpubViewerPlugin implements MethodCallHandler {
   static private Activity activity;
   static private Context context;
   static BinaryMessenger messenger;
+  static private EventChannel eventChannel;
+  static private EventChannel.EventSink sink;
 
   /** Plugin registration. */
   public static void registerWith(Registrar registrar) {
@@ -28,9 +32,27 @@ public class EpubViewerPlugin implements MethodCallHandler {
     context = registrar.context();
     activity = registrar.activity();
     messenger = registrar.messenger();
+    new EventChannel(messenger,"page").setStreamHandler(new EventChannel.StreamHandler() {
+
+      @Override
+      public void onListen(Object o, EventChannel.EventSink eventSink) {
+
+        sink = eventSink;
+        if(sink == null) {
+          Log.i("empty", "Sink is empty");
+        }
+      }
+
+      @Override
+      public void onCancel(Object o) {
+
+      }
+    });
+
 
     final MethodChannel channel = new MethodChannel(registrar.messenger(), "epub_viewer");
     channel.setMethodCallHandler(new EpubViewerPlugin());
+
   }
 
   @Override
@@ -53,11 +75,31 @@ public class EpubViewerPlugin implements MethodCallHandler {
       String bookPath = arguments.get("bookPath").toString();
       String lastLocation = arguments.get("lastLocation").toString();
 
-      reader = new Reader(context,messenger,config);
+      Log.i("opening", "In open function");
+      if(sink == null) {
+        Log.i("sink status", "sink is empty");
+      }
+      reader = new Reader(context,messenger,config, sink);
       reader.open(bookPath, lastLocation);
 
     }else if(call.method.equals("close")){
       reader.close();
+    }
+    else if (call.method.equals("setChannel")){
+      eventChannel = new EventChannel(messenger,"page");
+      eventChannel.setStreamHandler(new EventChannel.StreamHandler() {
+
+        @Override
+        public void onListen(Object o, EventChannel.EventSink eventSink) {
+
+          sink = eventSink;
+        }
+
+        @Override
+        public void onCancel(Object o) {
+
+        }
+      });
     }
 
     else {

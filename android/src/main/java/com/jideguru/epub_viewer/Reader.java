@@ -31,23 +31,24 @@ public class Reader implements OnHighlightListener, ReadLocatorListener, FolioRe
     public FolioReader folioReader;
     private Context context;
     public MethodChannel.Result result;
+    private EventChannel eventChannel;
     private EventChannel.EventSink pageEventSink;
     private BinaryMessenger messenger;
     private ReadLocator  read_locator;
-    private static final String PAGE_CHANNEL = "page";
+    private static final String PAGE_CHANNEL = "sage";
 
-    Reader(Context context, BinaryMessenger messenger,ReaderConfig config){
+    Reader(Context context, BinaryMessenger messenger, ReaderConfig config, EventChannel.EventSink sink){
         this.context = context;
         readerConfig = config;
+
         getHighlightsAndSave();
+        //setPageHandler(messenger);
 
         folioReader = FolioReader.get()
                 .setOnHighlightListener(this)
                 .setReadLocatorListener(this)
                 .setOnClosedListener(this);
-
-     
-        setPageHandler(messenger);
+        pageEventSink = sink;
     }
 
     public void open(String bookPath, String lastLocation){
@@ -56,20 +57,20 @@ public class Reader implements OnHighlightListener, ReadLocatorListener, FolioRe
         new Thread(new Runnable() {
             @Override
             public void run() {
-               try {
-                   Log.i("SavedLocation", "-> savedLocation -> " + location);
-                   if(location != null && !location.isEmpty()){
-                       ReadLocator readLocator = ReadLocator.fromJson(location);
-                       folioReader.setReadLocator(readLocator);
-                   }
-                   folioReader.setConfig(readerConfig.config, true)
-                           .openBook(path);  
-               } catch (Exception e) {
-                   e.printStackTrace();
-               }
+                try {
+                    Log.i("SavedLocation", "-> savedLocation -> " + location);
+                    if(location != null && !location.isEmpty()){
+                        ReadLocator readLocator = ReadLocator.fromJson(location);
+                        folioReader.setReadLocator(readLocator);
+                    }
+                    folioReader.setConfig(readerConfig.config, true)
+                            .openBook(path);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
         }).start();
-       
+
     }
 
     public void close(){
@@ -79,17 +80,33 @@ public class Reader implements OnHighlightListener, ReadLocatorListener, FolioRe
     private void setPageHandler(BinaryMessenger messenger){
 //        final MethodChannel channel = new MethodChannel(registrar.messenger(), "page");
 //        channel.setMethodCallHandler(new EpubKittyPlugin());
-        new EventChannel(messenger,PAGE_CHANNEL).setStreamHandler(new EventChannel.StreamHandler() {
-            @Override
-            public void onListen(Object o, EventChannel.EventSink eventSink) {
-                pageEventSink = eventSink;
-            }
+        Log.i("event sink is", "in set page handler:" );
+        eventChannel = new EventChannel(messenger,PAGE_CHANNEL);
 
-            @Override
-            public void onCancel(Object o) {
+        try {
 
-            }
-        });
+            eventChannel.setStreamHandler(new EventChannel.StreamHandler() {
+
+                @Override
+                public void onListen(Object o, EventChannel.EventSink eventSink) {
+
+                    Log.i("event sink is", "this is eveent sink:" );
+
+                    pageEventSink = eventSink;
+                    if(pageEventSink == null) {
+                        Log.i("empty", "Sink is empty");
+                    }
+                }
+
+                @Override
+                public void onCancel(Object o) {
+
+                }
+            });
+        }
+        catch (Error err) {
+            Log.i("and error", "error is " + err.toString());
+        }
     }
 
     private void getHighlightsAndSave() {
