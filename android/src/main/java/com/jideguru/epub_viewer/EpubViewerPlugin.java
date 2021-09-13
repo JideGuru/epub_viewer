@@ -11,9 +11,11 @@ import io.flutter.plugin.common.MethodChannel;
 import io.flutter.plugin.common.MethodChannel.MethodCallHandler;
 import io.flutter.plugin.common.MethodChannel.Result;
 import io.flutter.plugin.common.PluginRegistry.Registrar;
+import io.flutter.embedding.engine.plugins.FlutterPlugin;
+import androidx.annotation.NonNull;
 
 /** EpubReaderPlugin */
-public class EpubViewerPlugin implements MethodCallHandler {
+public class EpubViewerPlugin implements MethodCallHandler, FlutterPlugin {
 
   private Reader reader;
   private ReaderConfig config;
@@ -31,6 +33,16 @@ public class EpubViewerPlugin implements MethodCallHandler {
 
     final MethodChannel channel = new MethodChannel(registrar.messenger(), "epub_viewer");
     channel.setMethodCallHandler(new EpubViewerPlugin());
+  }
+
+  @Override
+  public void onAttachedToEngine(@NonNull FlutterPluginBinding binding) {
+    // TODO: your plugin is now attached to a Flutter experience.
+  }
+
+  @Override
+  public void onDetachedFromEngine(@NonNull FlutterPluginBinding binding) {
+    // TODO: your plugin is no longer attached to a Flutter experience.
   }
 
   @Override
