@@ -2,12 +2,14 @@ package com.jideguru.epub_viewer;
 
 import android.app.Activity;
 import android.content.Context;
+import android.util.Log;
 
 import java.util.Map;
 
 import io.flutter.embedding.engine.plugins.activity.ActivityAware;
 import io.flutter.embedding.engine.plugins.activity.ActivityPluginBinding;
 import io.flutter.plugin.common.BinaryMessenger;
+import io.flutter.plugin.common.EventChannel;
 import io.flutter.plugin.common.MethodCall;
 import io.flutter.plugin.common.MethodChannel;
 import io.flutter.plugin.common.MethodChannel.MethodCallHandler;
@@ -25,6 +27,8 @@ public class EpubViewerPlugin implements MethodCallHandler, FlutterPlugin, Activ
   static private Activity activity;
   static private Context context;
   static BinaryMessenger messenger;
+  static private EventChannel eventChannel;
+  static private EventChannel.EventSink sink;
   private static final String channelName = "epub_viewer";
 
   /** Plugin registration. */
@@ -33,15 +37,49 @@ public class EpubViewerPlugin implements MethodCallHandler, FlutterPlugin, Activ
     context = registrar.context();
     activity = registrar.activity();
     messenger = registrar.messenger();
+    new EventChannel(messenger,"page").setStreamHandler(new EventChannel.StreamHandler() {
+
+      @Override
+      public void onListen(Object o, EventChannel.EventSink eventSink) {
+
+        sink = eventSink;
+        if(sink == null) {
+          Log.i("empty", "Sink is empty");
+        }
+      }
+
+      @Override
+      public void onCancel(Object o) {
+
+      }
+    });
+
 
     final MethodChannel channel = new MethodChannel(registrar.messenger(), "epub_viewer");
     channel.setMethodCallHandler(new EpubViewerPlugin());
+
   }
 
   @Override
   public void onAttachedToEngine(@NonNull FlutterPluginBinding binding) {
     messenger = binding.getBinaryMessenger();
     context = binding.getApplicationContext();
+    new EventChannel(messenger,"page").setStreamHandler(new EventChannel.StreamHandler() {
+
+      @Override
+      public void onListen(Object o, EventChannel.EventSink eventSink) {
+
+        sink = eventSink;
+        if(sink == null) {
+          Log.i("empty", "Sink is empty");
+        }
+      }
+
+      @Override
+      public void onCancel(Object o) {
+
+      }
+    });
     channel = new MethodChannel(binding.getFlutterEngine().getDartExecutor(), channelName);
     channel.setMethodCallHandler(this);
   }
@@ -91,11 +129,31 @@ public class EpubViewerPlugin implements MethodCallHandler, FlutterPlugin, Activ
       String bookPath = arguments.get("bookPath").toString();
       String lastLocation = arguments.get("lastLocation").toString();
 
-      reader = new Reader(context,messenger,config);
+      Log.i("opening", "In open function");
+      if(sink == null) {
+        Log.i("sink status", "sink is empty");
+      }
+      reader = new Reader(context,messenger,config, sink);
       reader.open(bookPath, lastLocation);
 
     }else if(call.method.equals("close")){
       reader.close();
+    }
+    else if (call.method.equals("setChannel")){
+      eventChannel = new EventChannel(messenger,"page");
+      eventChannel.setStreamHandler(new EventChannel.StreamHandler() {
+
+        @Override
+        public void onListen(Object o, EventChannel.EventSink eventSink) {
+
+          sink = eventSink;
+        }
+
+        @Override
+        public void onCancel(Object o) {
+
+        }
+      });
     }
 
     else {

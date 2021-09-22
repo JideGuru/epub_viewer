@@ -7,9 +7,7 @@ import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
 
 part 'model/enum/epub_scroll_direction.dart';
-
 part 'model/epub_locator.dart';
-
 part 'utils/util.dart';
 
 class EpubViewer {
@@ -45,8 +43,7 @@ class EpubViewer {
   static void open(String bookPath, {EpubLocator? lastLocation}) async {
     Map<String, dynamic> agrs = {
       "bookPath": bookPath,
-      'lastLocation':
-          lastLocation == null ? '' : jsonEncode(lastLocation.toJson()),
+      'lastLocation': lastLocation == null ? '' : jsonEncode(lastLocation.toJson()),
     };
     await _channel.invokeMethod('open', agrs);
   }
@@ -57,20 +54,23 @@ class EpubViewer {
     if (extension(bookPath) == '.epub') {
       Map<String, dynamic> agrs = {
         "bookPath": (await Util.getFileFromAsset(bookPath)).path,
-        'lastLocation':
-            lastLocation == null ? '' : jsonEncode(lastLocation.toJson()),
+        'lastLocation': lastLocation == null ? '' : jsonEncode(lastLocation.toJson()),
       };
+      _channel.invokeMethod('setChannel');
       await _channel.invokeMethod('open', agrs);
     } else {
       throw ('${extension(bookPath)} cannot be opened, use an EPUB File');
     }
   }
 
+  static Future setChannel() async {
+    await _channel.invokeMethod('setChannel');
+  }
+
   /// Stream to get EpubLocator for android and pageNumber for iOS
   static Stream get locatorStream {
-    Stream pageStream = _pageChannel
-        .receiveBroadcastStream()
-        .map((value) => Platform.isAndroid ? value : '{}');
+    print("In stream");
+    Stream pageStream = _pageChannel.receiveBroadcastStream().map((value) => value);
 
     return pageStream;
   }
