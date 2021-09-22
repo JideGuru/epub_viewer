@@ -5,6 +5,8 @@ import android.content.Context;
 
 import java.util.Map;
 
+import io.flutter.embedding.engine.plugins.activity.ActivityAware;
+import io.flutter.embedding.engine.plugins.activity.ActivityPluginBinding;
 import io.flutter.plugin.common.BinaryMessenger;
 import io.flutter.plugin.common.MethodCall;
 import io.flutter.plugin.common.MethodChannel;
@@ -15,14 +17,15 @@ import io.flutter.embedding.engine.plugins.FlutterPlugin;
 import androidx.annotation.NonNull;
 
 /** EpubReaderPlugin */
-public class EpubViewerPlugin implements MethodCallHandler, FlutterPlugin {
+public class EpubViewerPlugin implements MethodCallHandler, FlutterPlugin, ActivityAware {
 
   private Reader reader;
   private ReaderConfig config;
-
+  private MethodChannel channel;
   static private Activity activity;
   static private Context context;
   static BinaryMessenger messenger;
+  private static final String channelName = "epub_viewer";
 
   /** Plugin registration. */
   public static void registerWith(Registrar registrar) {
@@ -37,12 +40,35 @@ public class EpubViewerPlugin implements MethodCallHandler, FlutterPlugin {
 
   @Override
   public void onAttachedToEngine(@NonNull FlutterPluginBinding binding) {
-    // TODO: your plugin is now attached to a Flutter experience.
+    messenger = binding.getBinaryMessenger();
+    context = binding.getApplicationContext();
+    channel = new MethodChannel(binding.getFlutterEngine().getDartExecutor(), channelName);
+    channel.setMethodCallHandler(this);
   }
 
   @Override
   public void onDetachedFromEngine(@NonNull FlutterPluginBinding binding) {
     // TODO: your plugin is no longer attached to a Flutter experience.
+  }
+
+  @Override
+  public void onAttachedToActivity(@NonNull ActivityPluginBinding activityPluginBinding) {
+    activity = activityPluginBinding.getActivity();
+  }
+
+  @Override
+  public void onDetachedFromActivityForConfigChanges() {
+
+  }
+
+  @Override
+  public void onReattachedToActivityForConfigChanges(@NonNull ActivityPluginBinding activityPluginBinding) {
+
+  }
+
+  @Override
+  public void onDetachedFromActivity() {
+    activity = null;
   }
 
   @Override
