@@ -45,6 +45,7 @@ class EpubViewer {
       "bookPath": bookPath,
       'lastLocation': lastLocation == null ? '' : jsonEncode(lastLocation.toJson()),
     };
+    _channel.invokeMethod('setChannel');
     await _channel.invokeMethod('open', agrs);
   }
 
